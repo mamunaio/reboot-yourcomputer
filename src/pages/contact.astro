@@ -1,0 +1,240 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { business } from '../config/business';
+---
+
+<Layout title="Contact - Reboot Computer Repairs" description={`Get in touch with Reboot Computer Repairs. Call ${business.phone} or fill out our contact form. Open 7 AM to 10 PM every day.`}>
+  <section style="padding: 4rem 2rem; background: linear-gradient(180deg, #f9fafb 0%, #fff 100%);">
+    <div class="wrap">
+      <h1 style="text-align: center; margin-bottom: 1rem;">Contact Us</h1>
+      <p style="text-align: center; font-size: 1.125rem; color: #6b7280; max-width: 700px; margin: 0 auto;">
+        Get in touch for a free quote or to book your repair appointment.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding: 4rem 2rem;">
+    <div class="wrap">
+      <div style="max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
+
+        <div>
+          <h2 style="margin-bottom: 2rem;">Get in Touch</h2>
+          <div style="margin-bottom: 2.5rem;">
+            <h3 style="color: #DC2626; font-size: 1.125rem; margin-bottom: 0.5rem;">Phone</h3>
+            <a href={business.phoneHref} style="font-size: 1.25rem; font-weight: 600; color: #DC2626;">{business.phone}</a>
+            <p style="color: #6b7280; font-size: 0.95rem; margin-top: 0.5rem;">{business.phoneNote} {business.hours.summary}</p>
+          </div>
+
+          <div style="margin-bottom: 2.5rem;">
+            <h3 style="color: #DC2626; font-size: 1.125rem; margin-bottom: 0.5rem;">Email</h3>
+            <a href={`mailto:${business.email}`} style="font-size: 1.125rem; color: #DC2626;">{business.email}</a>
+            <p style="color: #6b7280; font-size: 0.95rem; margin-top: 0.5rem;">We'll get back to you within 24 hours.</p>
+          </div>
+
+          <div style="margin-bottom: 2.5rem;">
+            <h3 style="color: #DC2626; font-size: 1.125rem; margin-bottom: 0.5rem;">Service Area</h3>
+            <p style="color: #6b7280;">Greater Brisbane, plus {business.areasServed.slice(1).join(', ')}. No call out fees and no travel fees anywhere we service.</p>
+          </div>
+
+          <div style="background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%); padding: 1.5rem; border-radius: 0.75rem; border-left: 4px solid #DC2626;">
+            <h4 style="margin-bottom: 0.5rem;">Hours</h4>
+            <p style="color: #6b7280; font-size: 0.95rem;">Open every day, 7 AM to 10 PM.<br/>Weekends, public holidays and late nights carry no extra surcharge.</p>
+          </div>
+        </div>
+
+        <div>
+          <h2 style="margin-bottom: 2rem;">Quick Enquiry</h2>
+          <form class="enquiry" method="POST" action={business.formAction} novalidate>
+            <input type="hidden" name="access_key" value={business.web3formsAccessKey}>
+            <input type="hidden" name="subject" value="Website enquiry — rebootyourcomputer.com.au">
+            <input type="hidden" name="redirect" value="https://www.rebootyourcomputer.com.au/contact/?sent=1">
+            <div class="field">
+              <label for="name">Your name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required maxlength="100" placeholder="John Smith">
+            </div>
+
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="40" placeholder="0401 234 567">
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" maxlength="120" placeholder="you@example.com">
+              <p class="hint">A phone number or an email address — whichever suits.</p>
+            </div>
+
+            <div class="field">
+              <label for="message">What's wrong?</label>
+              <textarea id="message" name="message" required maxlength="4000" placeholder="Tell us what the computer is doing."></textarea>
+            </div>
+
+            {/* Web3Forms honeypot — a real bot fills every field; a real visitor never sees this one. */}
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+
+            <button type="submit" class="btn btn-primary">Send enquiry</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+          <p class="hint" style="margin-top: 1rem;">We'll get back to you with a quote and a time. If it's urgent, calling is faster.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="wrap">
+      <h2>Or Call Us Now</h2>
+      <p>Quick quote over the phone. No obligation.</p>
+      <a href={business.phoneHref} class="btn btn-secondary cta-invert">{business.phone}</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .enquiry {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .field label {
+    font-weight: 500;
+    font-size: 0.9375rem;
+  }
+
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--color-gray-900);
+    background: var(--color-white);
+  }
+
+  .field textarea {
+    min-height: 140px;
+    resize: vertical;
+  }
+
+  .field input:focus-visible,
+  .field textarea:focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: 1px;
+    border-color: var(--color-red);
+  }
+
+  .field input[aria-invalid='true'],
+  .field textarea[aria-invalid='true'] {
+    border-color: var(--color-red);
+  }
+
+  .hint {
+    color: var(--color-gray-600);
+    font-size: 0.85rem;
+    margin: 0;
+  }
+
+  /* Honeypot: off-screen rather than display:none, which some bots detect. */
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .form-status {
+    margin: 0;
+    font-size: 0.9375rem;
+    min-height: 1.4em;
+  }
+
+  .form-status[data-state='error'] {
+    color: var(--color-red-dark);
+  }
+
+  .form-status[data-state='ok'] {
+    color: #15803d;
+    font-weight: 500;
+  }
+
+  .enquiry[data-sending] button {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  // Progressive enhancement. Without JS the form POSTs straight to
+  // Web3Forms, which redirects back to ?sent=1 on success. With JS we
+  // fetch the same endpoint so the customer never leaves the page.
+  const form = document.querySelector<HTMLFormElement>('.enquiry');
+  const status = document.querySelector<HTMLParagraphElement>('.form-status');
+
+  // Returning from the no-JS path.
+  if (status && new URLSearchParams(location.search).get('sent') === '1') {
+    status.dataset.state = 'ok';
+    status.textContent = 'Thanks — we have got that and will be in touch.';
+    history.replaceState(null, '', location.pathname);
+  }
+
+  if (form && status) {
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const data = new FormData(form);
+      const name = String(data.get('name') ?? '').trim();
+      const phone = String(data.get('phone') ?? '').trim();
+      const email = String(data.get('email') ?? '').trim();
+      const message = String(data.get('message') ?? '').trim();
+
+      const problems: string[] = [];
+      if (!name) problems.push('your name');
+      if (!phone && !email) problems.push('a phone number or email');
+      if (!message) problems.push('what is going wrong');
+
+      if (problems.length) {
+        status.dataset.state = 'error';
+        status.textContent = `We still need ${problems.join(', ')}.`;
+        return;
+      }
+
+      form.dataset.sending = 'true';
+      status.dataset.state = '';
+      status.textContent = 'Sending…';
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { accept: 'application/json' },
+        });
+        const body = await res.json().catch(() => ({}));
+
+        if (res.ok && body.success) {
+          form.reset();
+          status.dataset.state = 'ok';
+          status.textContent = 'Thanks — we have got that and will be in touch.';
+        } else {
+          status.dataset.state = 'error';
+          status.textContent = body.message || 'Something went wrong. Please call us instead.';
+        }
+      } catch {
+        status.dataset.state = 'error';
+        status.textContent = 'Could not reach us just now. Please call instead.';
+      } finally {
+        delete form.dataset.sending;
+      }
+    });
+  }
+</script>

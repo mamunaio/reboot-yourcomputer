@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import about from '../content/about/index.json';
+---
+
+<Layout title="About - Reboot Your Computer" description="About Reboot Computer Repairs. Certified technicians fixing computers in Brisbane since 2008.">
+  <section style="padding: 4rem 2rem; background: linear-gradient(180deg, #f9fafb 0%, #fff 100%);">
+    <div class="wrap">
+      <h1 style="text-align: center; margin-bottom: 1rem;">{about.heroHeading}</h1>
+      <p style="text-align: center; font-size: 1.125rem; color: #6b7280; max-width: 700px; margin: 0 auto;">
+        {about.heroBody}
+      </p>
+    </div>
+  </section>
+
+  <section style="padding: 4rem 2rem;">
+    <div class="wrap">
+      <div style="max-width: 900px; margin: 0 auto;">
+        {about.sections.map((section) => (
+          <div style="margin-bottom: 4rem;">
+            <h2 style="color: #DC2626; margin-bottom: 1.5rem;">{section.heading}</h2>
+            {section.body && (
+              <p style="font-size: 1.0625rem; line-height: 1.8; color: #374151;">{section.body}</p>
+            )}
+            {section.bullets && section.bullets.length > 0 && (
+              <ul style="margin: 1.5rem 0; padding-left: 1.5rem; color: #374151;">
+                {section.bullets.map((bullet: string) => (
+                  <li style="margin-bottom: 0.75rem;">{bullet}</li>
+                ))}
+              </ul>
+            )}
+            {section.heading === 'What We Fix' && (
+              <p style="margin-top: 1rem;"><a href="/services/">See the full services list &rarr;</a></p>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="wrap">
+      <h2>{about.ctaHeading}</h2>
+      <p>{about.ctaBody}</p>
+      <a href="/contact/" class="btn btn-secondary" style="color: var(--color-white); border-color: var(--color-white);">Contact Us</a>
+    </div>
+  </section>
+</Layout>

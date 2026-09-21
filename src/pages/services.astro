@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { business } from '../config/business';
+import { SERVICES_FALLBACK } from '../data/services-fallback';
+---
+
+<Layout title="Services - Reboot Your Computer" description="Computer repair services in Brisbane. Virus removal, data recovery, hardware repair, and software setup.">
+  <section class="hero" id="services-hero">
+    <div class="hero-content">
+      <h1 id="services-h1">Our Services</h1>
+      <p id="services-sub">Expert computer repair for every issue. Fast diagnosis, transparent pricing, same-day service.</p>
+      <div class="hero-actions">
+        <a href="/contact/" class="btn btn-primary">Book Now</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="services">
+    <div class="wrap">
+      <div class="services-grid" id="services-grid">
+        {SERVICES_FALLBACK.map((s) => (
+          s.link ? (
+            <a href={s.link} class="service-card service-card-link" style="text-decoration: none; color: inherit; display: block;">
+              <h3>{s.title}</h3>
+              <p>{s.description}</p>
+            </a>
+          ) : (
+            <div class="service-card">
+              <h3>{s.title}</h3>
+              <p>{s.description}</p>
+            </div>
+          )
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing">
+    <div class="wrap">
+      <h2>Our Rates</h2>
+      <p class="pricing-lead">No call out fees, no travel fees, no hidden charges. Open 7 AM to 10 PM every day, including public holidays, with no surcharge.</p>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <h3>Workshop Repairs</h3>
+          <p class="pricing-price"><strong>{business.rates.workshop.price}</strong> <span>{business.rates.workshop.unit}</span></p>
+        </div>
+        <div class="pricing-card">
+          <h3>On-Site Service</h3>
+          <p class="pricing-price"><strong>{business.rates.onsite.price}</strong> <span>{business.rates.onsite.unit}</span></p>
+        </div>
+        <div class="pricing-card">
+          <h3>Remote Service</h3>
+          <p class="pricing-price"><strong>{business.rates.remote.price}</strong> <span>{business.rates.remote.unit}</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="wrap">
+      <h2 id="services-cta-h2">Need Help? Contact Us Today</h2>
+      <p id="services-cta-sub">Call for a free quote or to book your repair appointment.</p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="/contact/" class="btn btn-secondary cta-invert">Book Now</a>
+      </div>
+    </div>
+  </section>
+
+  <script src="/cms-fetch-services.js" defer></script>
+</Layout>

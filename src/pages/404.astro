@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Without a 404.html in the build, Cloudflare Pages was serving the homepage
+// with a 200 for every unmatched path — a site-wide soft 404. This page makes
+// unknown URLs return a genuine 404 instead.
+---
+
+<Layout
+  title="Page Not Found - Reboot Computer Repairs"
+  description="That page could not be found. Browse our computer repair services in Brisbane."
+>
+  <section class="notfound">
+    <div class="wrap">
+      <p class="notfound-code">404</p>
+      <h1>That page has moved on</h1>
+      <p class="notfound-lead">
+        We rebuilt this site and some older pages are gone. Everything we do is
+        still here, just in fewer places.
+      </p>
+      <div class="notfound-actions">
+        <a href="/" class="btn btn-primary">Go to the homepage</a>
+        <a href="/services/" class="btn btn-secondary">See what we fix</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .notfound {
+    padding: 6rem 3rem;
+    text-align: center;
+    background: linear-gradient(180deg, #ffffff 0%, var(--color-gray-50) 100%);
+  }
+
+  .notfound-code {
+    font-family: var(--font-display);
+    font-size: 5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin: 0 0 0.5rem;
+    background: linear-gradient(135deg, var(--color-red), var(--color-orange));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .notfound-lead {
+    color: var(--color-gray-600);
+    max-width: 48ch;
+    margin: 0 auto 2.5rem;
+    font-size: 1.0625rem;
+  }
+
+  .notfound-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .notfound {
+      padding: 4rem 2rem;
+    }
+
+    .notfound-code {
+      font-size: 3.5rem;
+    }
+  }
+</style>

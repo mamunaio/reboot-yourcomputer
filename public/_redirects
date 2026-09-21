@@ -1,0 +1,44 @@
+# Cloudflare Pages redirect map for the WordPress -> Astro cutover.
+#
+# Without this file every unmatched path was being served the homepage with a
+# 200, which turns ~104 old URLs into duplicate content instead of honest
+# redirects. Splat rules count against the 100 dynamic-rule limit; the suburb
+# pages are collapsed into one rule rather than listed individually.
+#
+# Decision (2026-08-17): the ~100 suburb pages produced roughly 2 clicks per
+# quarter between them and sat at position 37-63. They are redirected to the
+# homepage rather than rebuilt. See SEO-BASELINE.md.
+
+# --- Suburb pages -> homepage -------------------------------------------
+/computer-repairs-*              /            301
+
+# --- Old WordPress pages that have an Astro equivalent -------------------
+/about-us                        /about/      301
+/about-us/                       /about/      301
+/contact-us                      /contact/    301
+/contact-us/                     /contact/    301
+
+# --- Old pages with no equivalent ---------------------------------------
+/customer-reviews/               /            301
+/blog/                           /            301
+/computer-training/              /services/   301
+/virus-spyware-removal/          /services/   301
+/about-brisbane/                 /            301
+/about-north-lakes/              /            301
+/attractions-in-brisbane/        /            301
+/attractions-north-lakes/        /            301
+/arenas-stadiums-brisbane/       /            301
+/brisbane-amusement-parks/       /            301
+/cinemas-in-brisbane/            /            301
+/hotels-in-brisbane/             /            301
+/supermarkets-in-brisbane/       /            301
+/schools-north-lakes/            /            301
+/shopping-centres-in-north-lakes/ /           301
+
+# --- Retire WordPress endpoints -----------------------------------------
+/wp-login.php                    /            301
+/wp-admin/*                      /            301
+/wp-json/*                       /            301
+/xmlrpc.php                      /            301
+/wp-content/*                    /            301
+/feed/                           /            301

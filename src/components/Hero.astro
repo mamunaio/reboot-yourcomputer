@@ -1,0 +1,136 @@
+---
+import { business } from '../config/business';
+---
+
+<!-- HERO SECTION (CLEAN MODERN LIGHT THEME) -->
+<section class="relative pt-10 pb-16 lg:pt-16 lg:pb-24 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 border-b border-slate-200/80 dark:border-white/10" id="hero-section">
+  
+  <!-- Subtle decorative ambient background elements -->
+  <div class="absolute top-0 right-1/4 w-96 h-96 bg-red-500/5 dark:bg-red-500/10 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute bottom-0 left-10 w-96 h-96 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      
+      <!-- Hero Left Column -->
+      <div class="lg:col-span-7 space-y-6">
+        
+        <!-- Live Dispatch Ticker -->
+        <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 text-xs font-bold shadow-sm">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping shrink-0"></span>
+          <span class="font-extrabold text-red-600 uppercase tracking-wider">On-Duty in Greater Brisbane</span>
+          <span class="text-slate-300 dark:text-slate-600">•</span>
+          <span class="text-slate-600 dark:text-slate-400">$0 Call-Out Fees</span>
+        </div>
+
+        <!-- Main H1 Headline -->
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1] font-display">
+          Computer and Network Security in <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-orange-600 to-red-600">Brisbane</span>
+        </h1>
+
+        <!-- Lead Paragraph -->
+        <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
+          Commercial-grade hardwired 4K CCTV camera systems, secure Cat6 data cabling, network firewalls, and 24/7 smartphone surveillance. Installed with clean concealed wiring by licensed ACMA cablers &ndash; with zero ongoing monthly subscription fees.
+        </p>
+
+        <!-- Feature Chips -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1 text-xs font-bold text-slate-700 dark:text-slate-300">
+          <div class="flex items-center gap-2 p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-xs">
+            <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            <span>$0 Monthly Fees</span>
+          </div>
+          <div class="flex items-center gap-2 p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-xs">
+            <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            <span>Solid Copper Cat6</span>
+          </div>
+          <div class="flex items-center gap-2 p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-xs">
+            <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            <span>5-Yr Workmanship</span>
+          </div>
+        </div>
+
+        <!-- Button Row -->
+        <div class="pt-2 flex flex-wrap items-center gap-4">
+          <a href="#quote" class="px-8 py-4 rounded-xl bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-600 text-white font-black text-xs uppercase tracking-wider shadow-xl shadow-red-600/25 inline-flex items-center gap-2.5 transform hover:-translate-y-0.5 transition-all">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Request a Free Quote
+          </a>
+
+          <a href="#pricing" class="px-6 py-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/15 text-slate-800 dark:text-white hover:border-red-500 font-bold text-xs uppercase tracking-wider shadow-sm transition-all inline-flex items-center gap-2">
+            <span>View Packages</span>
+            <span class="text-red-500">&darr;</span>
+          </a>
+
+          <a href={business.phoneHref} class="px-5 py-4 rounded-xl text-slate-700 dark:text-slate-300 hover:text-red-600 font-bold text-xs uppercase tracking-wider transition-all inline-flex items-center gap-2">
+            <svg class="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+            <span>Call {business.phone}</span>
+          </a>
+        </div>
+
+        <!-- Rapid Suburb Tag Pills -->
+        <div class="pt-4 border-t border-slate-200 dark:border-white/10 space-y-2">
+          <div class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+            Quick Suburb Check (Click to Pre-fill):
+          </div>
+          <div class="flex flex-wrap items-center gap-1.5 text-xs font-semibold">
+            <button onclick="selectSuburbForQuote('Brisbane CBD (4000)')" class="px-3 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-red-500 hover:bg-red-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all cursor-pointer shadow-2xs">Brisbane CBD</button>
+            <button onclick="selectSuburbForQuote('Chermside (4032)')" class="px-3 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-red-500 hover:bg-red-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all cursor-pointer shadow-2xs">Chermside</button>
+            <button onclick="selectSuburbForQuote('Carindale (4152)')" class="px-3 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-red-500 hover:bg-red-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all cursor-pointer shadow-2xs">Carindale</button>
+            <button onclick="selectSuburbForQuote('Sunnybank (4109)')" class="px-3 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-red-500 hover:bg-red-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all cursor-pointer shadow-2xs">Sunnybank</button>
+            <button onclick="selectSuburbForQuote('North Lakes (4509)')" class="px-3 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-red-500 hover:bg-red-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all cursor-pointer shadow-2xs">North Lakes</button>
+            <button onclick="selectSuburbForQuote('Logan (4114)')" class="px-3 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-red-500 hover:bg-red-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all cursor-pointer shadow-2xs">Logan</button>
+            <button onclick="selectSuburbForQuote('Ipswich (4305)')" class="px-3 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-red-500 hover:bg-red-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all cursor-pointer shadow-2xs">Ipswich</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Hero Right Column: Camera Image Card (Clean Bezel Light Presentation) -->
+      <div class="lg:col-span-5">
+        <div class="relative mx-auto max-w-md lg:max-w-none group">
+          
+          <!-- Soft Drop Shadow Container -->
+          <div class="relative rounded-3xl p-2 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/15 shadow-2xl shadow-slate-300/60 dark:shadow-black/50 transition-all duration-500 group-hover:shadow-red-500/10">
+            
+            <div class="relative rounded-2xl overflow-hidden aspect-[941/1200] bg-slate-950">
+              <img 
+                src="/3-brands-in-a-single-shot.png" 
+                alt="Commercial Dahua, Hikvision, and HiLook 4K security cameras professionally installed in Brisbane" 
+                class="w-full h-full object-cover object-top transform group-hover:scale-102 transition-transform duration-700"
+                loading="eager"
+              />
+
+              <!-- Top Live Camera OSD Overlay -->
+              <div class="absolute top-3 inset-x-3 flex items-center justify-between pointer-events-none z-10">
+                <div class="px-3 py-1 rounded-full bg-slate-900/85 backdrop-blur-md border border-white/20 text-white text-[11px] font-mono font-bold flex items-center gap-1.5 shadow-md">
+                  <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                  <span>LIVE 4K NVR FEED</span>
+                </div>
+                <div class="px-2.5 py-1 rounded-md bg-black/70 backdrop-blur-md text-emerald-400 font-mono text-[10px] font-bold">
+                  PoE CONNECTED
+                </div>
+              </div>
+
+              <!-- Bottom Hardware Specs Strip -->
+              <div class="absolute bottom-3 inset-x-3 p-3 rounded-xl bg-slate-950/85 backdrop-blur-md border border-white/15 text-white flex items-center justify-between shadow-xl z-10">
+                <div>
+                  <div class="text-xs font-black tracking-tight text-white font-display">
+                    Commercial 4K Turrets &amp; NVR
+                  </div>
+                  <div class="text-[10px] text-slate-300">Dahua • Hikvision • HiLook Solid PoE</div>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-red-600 text-white font-mono text-[9px] font-bold uppercase tracking-wider">
+                  Zero Cloud Fees
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,138 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { business } from '../config/business';
+import home from '../content/home/index.json';
+
+// Metadata mirrors the live WordPress homepage exactly — see SEO-BASELINE.md.
+// This page ranks position 8.7 for "computer repairs brisbane"; do not change
+// the title, description, H1 or canonical without checking that file first.
+// The phone number is interpolated from config so it has one home.
+// The H1/hero copy below is editorial and lives in src/content/home/index.json
+// (edit visually via `npm run tina:dev`), NOT here — SEO metadata stays as-is.
+const seoTitle = 'Reboot Computer Repairs Brisbane - Reboot Computer Repairs';
+const seoDescription = `Computer Repairs Brisbane - On-site, expert and affordable solutions for your PC, Mac & laptop repair needs. We provide quick and reliable repairs and services anywhere in Brisbane. We are open everyday from 7 AM to 10 PM even on holidays. Give us a call at ${business.phone} with no call out fees!`;
+
+const pricing = [
+  {
+    name: 'Workshop Repairs',
+    note: 'Open 7 AM to 10 PM',
+    price: business.rates.workshop.price,
+    unit: business.rates.workshop.unit,
+    points: [
+      'No call out fees',
+      'No hidden charges',
+      'No fix, no fee',
+      'Fix any computer problem',
+      'Most repairs are done in 1 hour',
+      'Expert technical support',
+    ],
+  },
+  {
+    name: 'On Site Service',
+    note: 'Best value',
+    price: business.rates.onsite.price,
+    unit: business.rates.onsite.unit,
+    points: [
+      'No call out fees',
+      'No travel fees',
+      'No hidden charges',
+      'No fix, no fee',
+      'Fix any computer problem',
+      'Most repairs are done in 1 hour',
+      'Expert technical support',
+    ],
+  },
+  {
+    name: 'Remote Service',
+    note: 'For easy to fix PC problems',
+    price: business.rates.remote.price,
+    unit: business.rates.remote.unit,
+    points: [
+      'No call out fees',
+      'No hidden charges',
+      'Download special software',
+      'Fix computer problems remotely',
+      'Most repairs are done in 1 hour',
+      'Expert technical support',
+    ],
+  },
+];
+
+---
+
+<Layout title={seoTitle} description={seoDescription}>
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Computer Repairs Brisbane</h1>
+      <p>{home.heroBody}</p>
+      <div class="hero-actions">
+        <a href="/contact/" class="btn btn-primary">Get a Quote</a>
+        <a href="/services/" class="btn btn-secondary">What We Fix</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro">
+    <div class="wrap">
+      <p>{home.introBody}</p>
+    </div>
+  </section>
+
+  <section class="services">
+    <div class="wrap">
+      <h2>What We Fix</h2>
+      <div class="services-grid">
+        {home.services.map((service) => (
+          <div class="service-card">
+            <h3>{service.icon} {service.title}</h3>
+            <p>{service.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing">
+    <div class="wrap">
+      <h2>We're Competitive On Our Pricing</h2>
+      <p class="pricing-lead">
+        You choose the time and date. Weekends, public holidays and late nights, with no extra surcharges.
+      </p>
+      <div class="pricing-grid">
+        {pricing.map((tier) => (
+          <div class="pricing-card">
+            <h3>{tier.name}</h3>
+            <p class="pricing-note">{tier.note}</p>
+            <p class="pricing-price"><strong>{tier.price}</strong> <span>{tier.unit}</span></p>
+            <ul>
+              {tier.points.map((point) => <li>{point}</li>)}
+            </ul>
+            <a href="/contact/" class="btn btn-primary">Get a Quote</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="why-us">
+    <div class="wrap">
+      <h2>Why Choose Reboot?</h2>
+      <div class="why-us-grid">
+        {home.whyUs.map((item) => (
+          <div class="why-us-item">
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="wrap">
+      <h2>{home.ctaHeading}</h2>
+      <p>{home.ctaBody}</p>
+      <a href="/contact/" class="btn btn-secondary cta-invert">Contact Us</a>
+    </div>
+  </section>
+</Layout>

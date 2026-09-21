@@ -1,0 +1,21 @@
+{
+  "name": "reboot-astro",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Reboot Computer Repairs - Astro + TinaCMS site",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "tina:dev": "tinacms dev -c \"astro dev\""
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "@tinacms/cli": "^1.5.0",
+    "astro": "^4.0.0",
+    "tinacms": "^1.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  }
+}

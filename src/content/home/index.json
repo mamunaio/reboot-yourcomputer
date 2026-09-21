@@ -1,0 +1,18 @@
+{
+  "heroBody": "On-site, expert and affordable repairs for your PC, Mac and laptop, anywhere in Brisbane. Open every day from 7 AM to 10 PM, holidays included. No call out fees.",
+  "introBody": "We cover the Greater Brisbane area, including Logan, Ipswich, Moreton and Redland Bay. We do not have technicians on the Sunshine Coast at the moment.",
+  "services": [
+    { "icon": "🛡️", "title": "Virus & Malware", "body": "Infections removed and the system hardened so it stays clean. Protection set up before you get it back." },
+    { "icon": "💾", "title": "Data Recovery", "body": "Failed and dead drives recovered. Photos, documents and email brought back where the hardware allows it." },
+    { "icon": "🔧", "title": "Laptop & Mac Hardware", "body": "Smashed screens, blank displays, missing keys, laptops that will not power on. MacBook and iMac included." },
+    { "icon": "⚙️", "title": "Setup & Migration", "body": "New machines configured and old ones moved across, so everything is where you left it." }
+  ],
+  "whyUs": [
+    { "title": "Open 7 AM to 10 PM", "body": "Every day of the year, holidays included. Weekends and late nights carry no extra surcharge." },
+    { "title": "No Fix, No Fee", "body": "No call out fees, no travel fees, no hidden charges. If we cannot fix it, you do not pay." },
+    { "title": "Usually Done In An Hour", "body": "Most repairs are finished within the first hour, whether that is in the workshop or at your place." },
+    { "title": "As Seen On Channel 9", "body": "We were interviewed by Channel 9 about slow internet speeds around Brisbane." }
+  ],
+  "ctaHeading": "Computer Playing Up?",
+  "ctaBody": "Tell us what is going wrong and we will come back with a price to fix it."
+}

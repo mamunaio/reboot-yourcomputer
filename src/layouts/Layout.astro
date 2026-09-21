@@ -1,0 +1,118 @@
+---
+import '../styles/global.css';
+import { business } from '../config/business';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+}
+
+const SITE = business.site;
+
+const {
+  title = 'Reboot Computer Repairs',
+  description = 'Computer repairs in Brisbane. Open 7 AM to 10 PM every day, no call out fees.',
+  canonical = new URL(Astro.url.pathname, SITE).href,
+} = Astro.props;
+
+// The live WordPress site emits Person schema, which is wrong for a local service
+// business and one of the gaps noted in SEO-BASELINE.md. Facts here come from the
+// live homepage — pricing, hours and service area are real, not placeholders.
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: business.name,
+  description: 'Expert and affordable computer repairs in Brisbane.',
+  url: SITE,
+  telephone: business.phoneHref.replace('tel:', ''),
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Brisbane',
+    addressRegion: 'QLD',
+    addressCountry: 'AU',
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: [
+        'Monday', 'Tuesday', 'Wednesday', 'Thursday',
+        'Friday', 'Saturday', 'Sunday',
+      ],
+      opens: business.hours.opens,
+      closes: business.hours.closes,
+    },
+  ],
+  areaServed: business.areasServed.map((name) => ({ '@type': 'City', name })),
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content={canonical}>
+    <meta property="og:locale" content="en_AU">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+    <link rel="canonical" href={canonical}>
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a href="/" class="brand">
+          <span class="word">Reboot Your Computer</span>
+          <span class="tagline">Fast Repairs Brisbane</span>
+        </a>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/services/">Services</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+        </nav>
+        <div class="header-cta">
+          <a href="/contact/" class="btn btn-primary" style="padding: 0.75rem 1.5rem; font-size: 0.95rem;">Contact Us</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h4>Contact</h4>
+            <p><a href="/contact/">Phone &amp; enquiry form</a></p>
+            <p>Email: <a href={`mailto:${business.email}`}>{business.email}</a></p>
+          </div>
+          <div class="footer-section">
+            <h4>Services</h4>
+            <p><a href="/services/">Virus & Malware Removal</a></p>
+            <p><a href="/services/">Data Recovery</a></p>
+            <p><a href="/services/">Hardware Repair</a></p>
+            <p><a href="/services/">Computer Setup</a></p>
+          </div>
+          <div class="footer-section">
+            <h4>Company</h4>
+            <p><a href="/about/">About Us</a></p>
+            <p><a href="/contact/">Contact</a></p>
+            <p><a href="/privacy/">Privacy Policy</a></p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; {new Date().getFullYear()} Reboot Computer Repairs. Brisbane, Australia.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

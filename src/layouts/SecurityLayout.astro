@@ -1,0 +1,289 @@
+---
+import { business } from '../config/business';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+}
+
+const SITE = business.site;
+
+const {
+  title = "Computer and Network Security Brisbane | CCTV & Firewall Installation | Reboot Computer Repairs",
+  description = "Commercial-grade hardwired CCTV camera systems, secure network cabling, firewalls, and 24/7 mobile surveillance for Brisbane homes and businesses. Licensed ACMA cabler, lifetime workmanship.",
+  canonical = new URL(Astro.url.pathname, SITE).href,
+} = Astro.props;
+
+const securitySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SecuritySystem',
+  name: 'Reboot Computer and Network Security',
+  description: 'Commercial CCTV security camera installation, network security, and data cabling in Brisbane.',
+  url: canonical,
+  telephone: business.phoneHref.replace('tel:', ''),
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Brisbane',
+    addressRegion: 'QLD',
+    addressCountry: 'AU',
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: business.hours.opens,
+      closes: business.hours.closes,
+    },
+  ],
+  areaServed: business.areasServed.map((name) => ({ '@type': 'City', name })),
+};
+---
+<!DOCTYPE html>
+<html lang="en-AU" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:locale" content="en_AU" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
+  <link rel="canonical" href={canonical} />
+
+  <!-- Anti-FOUC Instant Theme Detector (Default: LIGHT THEME) -->
+  <script is:inline>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('reboot-theme');
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+
+  <!-- Google Fonts: Space Grotesk & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN with Custom Tokens -->
+  <script src="https://cdn.tailwindcss.com" is:inline></script>
+  <script is:inline>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              red: '#DC2626',
+              redDark: '#991B1B',
+              redLight: '#FEE2E2',
+              blue: '#0284C7',
+              blueLight: '#E0F2FE',
+              orange: '#EA580C',
+              dark: '#0B1120',
+              card: '#0F172A',
+              surface: '#1E293B',
+              border: '#334155',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+            body: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            'light-card': '0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02)',
+            'light-hover': '0 20px 35px -5px rgba(220, 38, 38, 0.12), 0 10px 10px -5px rgba(220, 38, 38, 0.04)',
+            'red-glow': '0 0 35px rgba(220, 38, 38, 0.3)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style is:global>
+    :root {
+      --bg-page: #FAFAFA;
+      --text-main: #0F172A;
+      --text-muted: #475569;
+      --card-bg: #FFFFFF;
+      --card-border: #E2E8F0;
+      --panel-bg: #F8FAFC;
+      --accent-red: #DC2626;
+      --accent-blue: #0284C7;
+    }
+
+    html.dark {
+      --bg-page: #0B1120;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --card-bg: #0F172A;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --panel-bg: #1E293B;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    .glass-box {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html.dark .glass-box {
+      background: #0F172A;
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.6);
+    }
+
+    .glass-box:hover {
+      border-color: rgba(220, 38, 38, 0.4);
+      box-shadow: 0 20px 35px -5px rgba(220, 38, 38, 0.1), 0 10px 10px -5px rgba(220, 38, 38, 0.03);
+      transform: translateY(-2px);
+    }
+
+    /* Subtle Light-Friendly Grid Background */
+    .bg-light-grid {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(226, 232, 240, 0.5) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(226, 232, 240, 0.5) 1px, transparent 1px);
+    }
+
+    html.dark .bg-light-grid {
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    @keyframes pulse-subtle {
+      0%, 100% { opacity: 0.25; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(1.05); }
+    }
+    .pulse-glow-anim {
+      animation: pulse-subtle 4s ease-in-out infinite;
+    }
+  </style>
+
+  <script type="application/ld+json" set:html={JSON.stringify(securitySchema)} />
+</head>
+<body class="antialiased selection:bg-red-600 selection:text-white">
+  <slot />
+
+  <!-- Global Theme Toggle & Helper Script -->
+  <script is:inline>
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      if (isDark) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('reboot-theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('reboot-theme', 'dark');
+      }
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      if (menu) {
+        menu.classList.toggle('hidden');
+      }
+    }
+
+    
+    function prefillQuote(packageTitle, propertyType) {
+      const quoteSection = document.getElementById('quote');
+      if (quoteSection) {
+        quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      const serviceSelect = document.getElementById('form-service');
+      if (serviceSelect) {
+        const lower = (packageTitle || '').toLowerCase();
+        if (lower.includes('byo')) {
+          serviceSelect.value = 'BYO Camera Installation';
+        } else if (lower.includes('active deterrence')) {
+          serviceSelect.value = 'Active Deterrence CCTV';
+        } else {
+          serviceSelect.value = 'New Complete CCTV System';
+        }
+      }
+
+      const propertySelect = document.getElementById('form-property');
+      if (propertySelect && propertyType) {
+        propertySelect.value = propertyType;
+      }
+
+      const cameraSelect = document.getElementById('form-cameras');
+      if (cameraSelect) {
+        if ((packageTitle || '').toLowerCase().includes('4-camera') || (packageTitle || '').toLowerCase().includes('turnkey')) {
+          cameraSelect.value = '4 Cameras (Standard Home)';
+        }
+      }
+
+      const notesInput = document.getElementById('form-notes');
+      if (notesInput && packageTitle) {
+        notesInput.value = 'Interested in: ' + packageTitle;
+      }
+
+      setTimeout(() => {
+        const nameInput = document.getElementById('form-name');
+        if (nameInput) {
+          nameInput.focus();
+        }
+        const quoteBox = quoteSection ? quoteSection.querySelector('.glass-box') : null;
+        if (quoteBox) {
+          quoteBox.classList.add('ring-4', 'ring-red-500/40');
+          setTimeout(() => {
+            quoteBox.classList.remove('ring-4', 'ring-red-500/40');
+          }, 1500);
+        }
+      }, 450);
+    }
+    window.prefillQuote = prefillQuote;
+
+    function selectSuburbForQuote(suburb) {
+      const suburbInput = document.getElementById('form-suburb') || document.querySelector('input[name="suburb"]');
+      if (suburbInput) {
+        suburbInput.value = suburb;
+        suburbInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        suburbInput.focus();
+        // Visual feedback highlight
+        suburbInput.classList.add('ring-4', 'ring-red-500/30', 'border-red-500');
+        setTimeout(() => {
+          suburbInput.classList.remove('ring-4', 'ring-red-500/30');
+        }, 2000);
+      } else {
+        const quoteSection = document.getElementById('quote');
+        if (quoteSection) {
+          quoteSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+  </script>
+</body>
+</html>

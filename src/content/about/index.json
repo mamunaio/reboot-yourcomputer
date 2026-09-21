@@ -1,0 +1,48 @@
+{
+  "heroHeading": "About Reboot Computer Repairs",
+  "heroBody": "Expert computer repairs for Brisbane. We've fixed computers here since 2008.",
+  "sections": [
+    {
+      "heading": "Who We Are",
+      "body": "Reboot Computer Repairs has fixed computers in Brisbane since 2008. We're a small team of certified technicians, and between us we've seen most of what a PC or laptop can throw at you. We don't make excuses. We don't keep you waiting.",
+      "bullets": []
+    },
+    {
+      "heading": "What We Fix",
+      "body": "Most computer problems are predictable. Virus infections. Hard drive failures. Battery wear. Overheating. We diagnose fast, explain what's wrong in plain English, and quote a fair price. If you approve, we fix it. If you don't, you leave with no obligation. Here's what we handle most often, see the full list on our services page.",
+      "bullets": [
+        "Virus and malware removal",
+        "Data recovery from failed and dead drives",
+        "Hardware repair for screens, batteries and ports",
+        "New computer setup and data migration"
+      ]
+    },
+    {
+      "heading": "Why We're Different",
+      "body": "",
+      "bullets": [
+        "No call out fees. You only pay for what we fix.",
+        "Open 7 AM to 10 PM every day, holidays included.",
+        "Most repairs done within the hour.",
+        "No fix, no fee. If we can't fix it, you don't pay."
+      ]
+    },
+    {
+      "heading": "Pricing",
+      "body": "Workshop repairs are $150 an hour. On site, it's $150 for the first hour, then $37.50 every 15 minutes. Remote service is $37.50 per 15 minutes. No hidden charges on any of it.",
+      "bullets": []
+    },
+    {
+      "heading": "Where We Work",
+      "body": "We cover the Greater Brisbane area, including Logan, Ipswich, Moreton Bay and Redland Bay. We don't have technicians on the Sunshine Coast at the moment.",
+      "bullets": []
+    },
+    {
+      "heading": "As Seen On Channel 9",
+      "body": "Channel 9 interviewed us about slow internet speeds around Brisbane.",
+      "bullets": []
+    }
+  ],
+  "ctaHeading": "Ready to Get Your Computer Fixed?",
+  "ctaBody": "Tell us what's going wrong and we'll come back with a price to fix it."
+}
