@@ -10,16 +10,16 @@ interface Props {
 const SITE = business.site;
 
 const {
-  title = "Computer and Network Security Brisbane | CCTV & Firewall Installation | Reboot Computer Repairs",
-  description = "Commercial-grade hardwired CCTV camera systems, secure network cabling, firewalls, and 24/7 mobile surveillance for Brisbane homes and businesses. Licensed ACMA cabler, lifetime workmanship.",
+  title = "CCTV & Security Camera Installation Brisbane | Reboot Computer Repairs",
+  description = "Commercial-grade hardwired 4K CCTV camera systems, secure Cat6 data cabling, and 24/7 mobile surveillance for Brisbane homes and businesses. Licensed ACMA cabler, $0 call-out fee.",
   canonical = new URL(Astro.url.pathname, SITE).href,
 } = Astro.props;
 
 const securitySchema = {
   '@context': 'https://schema.org',
   '@type': 'SecuritySystem',
-  name: 'Reboot Computer and Network Security',
-  description: 'Commercial CCTV security camera installation, network security, and data cabling in Brisbane.',
+  name: 'Reboot CCTV & Security Camera Installation Brisbane',
+  description: 'Commercial 4K CCTV security camera installation, surveillance systems, and Cat6 data cabling in Brisbane.',
   url: canonical,
   telephone: business.phoneHref.replace('tel:', ''),
   priceRange: '$$',
@@ -287,3 +287,4 @@ const securitySchema = {
   </script>
 </body>
 </html>
+
