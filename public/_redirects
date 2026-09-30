@@ -13,6 +13,11 @@
 /computer-repairs-*              /            301
 
 # --- Old WordPress pages that have an Astro equivalent -------------------
+/cctv-security-camera-brisbane/  /services/cctv-security-camera-brisbane/ 301
+/cctv-security-camera-brisbane   /services/cctv-security-camera-brisbane/ 301
+/cctv-security-camera-brisbane.html /services/cctv-security-camera-brisbane/ 301
+/cctv-security-cameras-brisbane/ /services/cctv-security-camera-brisbane/ 301
+/cctv-security-cameras-brisbane  /services/cctv-security-camera-brisbane/ 301
 /about-us                        /about/      301
 /about-us/                       /about/      301
 /contact-us                      /contact/    301
