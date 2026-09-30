@@ -25,7 +25,7 @@
           var link = '';
           var titleLower = (s.title || '').toLowerCase();
           if (titleLower.indexOf('security') !== -1 || titleLower.indexOf('camera') !== -1) {
-            link = '/cctv-security-camera-brisbane/';
+            link = '/cctv-security-cameras-brisbane/';
           } else if (titleLower.indexOf('ethernet') !== -1 || titleLower.indexOf('data cabling') !== -1) {
             link = '/data-ethernet-installation/';
           }

@@ -17,6 +17,9 @@
 /about-us/                       /about/      301
 /contact-us                      /contact/    301
 /contact-us/                     /contact/    301
+/cctv-security-camera-brisbane/  /cctv-security-cameras-brisbane/ 301
+/cctv-security-camera-brisbane   /cctv-security-cameras-brisbane/ 301
+/cctv-security-camera-brisbane.html /cctv-security-cameras-brisbane/ 301
 
 # --- Old pages with no equivalent ---------------------------------------
 /customer-reviews/               /            301
