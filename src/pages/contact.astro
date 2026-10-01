@@ -44,10 +44,7 @@ import { business } from '../config/business';
 
         <div>
           <h2 style="margin-bottom: 2rem;">Quick Enquiry</h2>
-          <form class="enquiry" method="POST" action={business.formAction} novalidate>
-            <input type="hidden" name="access_key" value={business.web3formsAccessKey}>
-            <input type="hidden" name="subject" value="Website enquiry — rebootyourcomputer.com.au">
-            <input type="hidden" name="redirect" value="https://www.rebootyourcomputer.com.au/contact/?sent=1">
+          <form class="enquiry" method="POST" action="/api/enquiry" novalidate>
             <div class="field">
               <label for="name">Your name</label>
               <input id="name" name="name" type="text" autocomplete="name" required maxlength="100" placeholder="John Smith">
@@ -213,21 +210,35 @@ import { business } from '../config/business';
       status.dataset.state = '';
       status.textContent = 'Sending…';
 
+      const botcheckInput = form.querySelector<HTMLInputElement>('input[name="botcheck"]');
+      const botcheck = (botcheckInput && botcheckInput.checked) ? 'bot' : '';
+
+      const payload = {
+        formType: 'contact',
+        name,
+        phone: phone || undefined,
+        email: email || undefined,
+        message: message || undefined,
+        botcheck: botcheck || undefined,
+      };
+
       try {
-        const res = await fetch(form.action, {
+        const res = await fetch('/api/enquiry', {
           method: 'POST',
-          body: data,
-          headers: { accept: 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
         });
         const body = await res.json().catch(() => ({}));
 
         if (res.ok && body.success) {
           form.reset();
           status.dataset.state = 'ok';
-          status.textContent = 'Thanks — we have got that and will be in touch.';
+          status.textContent = body.message || 'Thanks — we have got that and will be in touch.';
         } else {
           status.dataset.state = 'error';
-          status.textContent = body.message || 'Something went wrong. Please call us instead.';
+          status.textContent = body.error || body.message || 'Something went wrong. Please call us instead.';
         }
       } catch {
         status.dataset.state = 'error';

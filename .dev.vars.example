@@ -1,0 +1,4 @@
+RESEND_API_KEY=mock
+NOTIFICATION_EMAIL_TO=your-email@example.com
+NOTIFICATION_EMAIL_FROM=Reboot Your Computer <your-verified-sender@example.com>
+TURNSTILE_SECRET_KEY=your-turnstile-secret

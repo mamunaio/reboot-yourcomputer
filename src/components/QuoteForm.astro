@@ -6,10 +6,10 @@ import { business } from '../config/business';
 <!-- FINAL CONVERSION BLOCK: REQUEST A SECURITY QUOTE -->
 <section id="quote" class="py-20 relative overflow-hidden scroll-mt-24 bg-slate-50 dark:bg-slate-900/60 border-t border-slate-200 dark:border-white/10">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    
+
     <div class="glass-box rounded-3xl p-8 sm:p-12 border-2 border-slate-200 dark:border-white/15 relative overflow-hidden shadow-2xl">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-        
+
         <!-- Left Info Column -->
         <div class="lg:col-span-5 space-y-6">
           <span class="text-xs font-black text-red-600 dark:text-red-400 uppercase tracking-widest px-3.5 py-1 rounded-full bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800/50">
@@ -51,20 +51,15 @@ import { business } from '../config/business';
 
         <!-- Right Interactive Form Column (Web3Forms API Backend) -->
         <div class="lg:col-span-7">
-          
-          <!-- Web3Forms Powered Form -->
-          <form 
-            action={business.formAction} 
-            method="POST" 
-            id="cctv-quote-form" 
+
+          <!-- Unified Enquiry Form -->
+          <form
+            action="/api/enquiry"
+            method="POST"
+            id="cctv-quote-form"
             class="space-y-4 transition-opacity duration-300"
           >
-            <!-- Required Web3Forms Access Key -->
-            <input type="hidden" name="access_key" value={business.web3formsAccessKey} />
-            
-            <!-- Metadata & Anti-Spam Fields -->
-            <input type="hidden" name="subject" value="New CCTV Security Camera Quote Request - Brisbane - rebootyourcomputer.com.au" />
-            <input type="hidden" name="from_name" value="Reboot CCTV Brisbane Dispatch" />
+            <!-- Anti-Spam Botcheck Honeypot -->
             <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
 
             <!-- Row 1: Name & Suburb -->
@@ -151,9 +146,9 @@ import { business } from '../config/business';
 
             <!-- Submit Button & Disclaimer -->
             <div class="pt-2">
-              <button 
-                type="submit" 
-                id="submit-button" 
+              <button
+                type="submit"
+                id="submit-button"
                 class="w-full py-4 rounded-xl bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-600 text-white font-black text-sm uppercase tracking-wider shadow-lg shadow-red-600/30 transition-all cursor-pointer flex items-center justify-center gap-2 transform hover:-translate-y-0.5"
               >
                 <span id="button-text">Send Free Quote Request</span>
@@ -200,7 +195,7 @@ import { business } from '../config/business';
   if (quoteForm) {
     quoteForm.addEventListener('submit', async function(e) {
       e.preventDefault();
-      
+
       if (buttonText && buttonSpinner) {
         buttonText.textContent = 'Submitting Request...';
         buttonSpinner.classList.remove('hidden');
@@ -208,23 +203,42 @@ import { business } from '../config/business';
       }
 
       const formData = new FormData(quoteForm);
+      const botcheckInput = quoteForm.querySelector('input[name="botcheck"]');
+      const botcheck = (botcheckInput && botcheckInput.checked) ? 'bot' : '';
+
+      const payload = {
+        formType: 'cctv-quote',
+        name: String(formData.get('name') || '').trim(),
+        phone: String(formData.get('phone') || '').trim() || undefined,
+        email: String(formData.get('email') || '').trim() || undefined,
+        suburb: String(formData.get('suburb') || '').trim() || undefined,
+        propertyType: String(formData.get('propertyType') || '').trim() || undefined,
+        serviceType: String(formData.get('serviceType') || '').trim() || undefined,
+        cameraCount: String(formData.get('cameraCount') || '').trim() || undefined,
+        buildingStoreys: String(formData.get('buildingStoreys') || '').trim() || undefined,
+        message: String(formData.get('message') || '').trim() || undefined,
+        botcheck: botcheck || undefined,
+      };
 
       try {
-        const response = await fetch('https://api.web3forms.com/submit', {
+        const response = await fetch('/api/enquiry', {
           method: 'POST',
-          body: formData
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
         });
 
-        const result = await response.json();
+        const result = await response.json().catch(() => ({}));
 
-        if (result.success) {
+        if (response.ok && result.success) {
           quoteForm.classList.add('hidden');
           if (quoteSuccessMsg) {
             quoteSuccessMsg.classList.remove('hidden');
             quoteSuccessMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
         } else {
-          alert('Submission error: ' + (result.message || 'Please check your inputs and try again.'));
+          alert('Submission error: ' + (result.error || result.message || 'Please check your inputs and try again.'));
           if (buttonText && buttonSpinner) {
             buttonText.textContent = 'Send Free Quote Request';
             buttonSpinner.classList.add('hidden');
@@ -242,4 +256,3 @@ import { business } from '../config/business';
     });
   }
 </script>
-

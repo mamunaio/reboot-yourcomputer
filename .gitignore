@@ -37,3 +37,8 @@ tina/__generated__/
 # Archives
 *.zip
 *.tar.gz
+
+# Cloudflare
+.dev.vars
+.dev.vars.local
+.wrangler/
