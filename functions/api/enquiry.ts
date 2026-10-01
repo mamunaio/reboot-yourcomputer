@@ -93,6 +93,7 @@ async function logToGoogleSheets(
   ];
 
   const bodyData = {
+    secret,
     timestamp,
     formType,
     name: sanitizeSheetValue(fields.name),
@@ -116,7 +117,6 @@ async function logToGoogleSheets(
       signal: controller.signal,
       headers: {
         "Content-Type": "application/json",
-        "X-Google-Sheets-Secret": secret,
       },
       body: JSON.stringify(bodyData),
     }).finally(() => clearTimeout(timeoutId));
