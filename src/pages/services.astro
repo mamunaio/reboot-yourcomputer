@@ -1,14 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { business } from '../config/business';
-import { SERVICES_FALLBACK } from '../data/services-fallback';
+import { getServicesPageData } from '../utils/cms';
+
+const { heading, intro, items, ctaHeading, ctaSub } = await getServicesPageData();
 ---
 
 <Layout title="Services - Reboot Your Computer" description="Computer repair services in Brisbane. Virus removal, data recovery, hardware repair, and software setup.">
   <section class="hero" id="services-hero">
     <div class="hero-content">
-      <h1 id="services-h1">Our Services</h1>
-      <p id="services-sub">Expert computer repair for every issue. Fast diagnosis, transparent pricing, same-day service.</p>
+      <h1 id="services-h1">{heading}</h1>
+      <p id="services-sub">{intro}</p>
       <div class="hero-actions">
         <a href="/contact/" class="btn btn-primary">Book Now</a>
       </div>
@@ -18,7 +20,7 @@ import { SERVICES_FALLBACK } from '../data/services-fallback';
   <section class="services">
     <div class="wrap">
       <div class="services-grid" id="services-grid">
-        {SERVICES_FALLBACK.map((s) => (
+        {items.map((s) => (
           s.link ? (
             <a href={s.link} class="service-card service-card-link" style="text-decoration: none; color: inherit; display: block;">
               <h3>{s.title}</h3>
@@ -58,13 +60,11 @@ import { SERVICES_FALLBACK } from '../data/services-fallback';
 
   <section class="cta-banner">
     <div class="wrap">
-      <h2 id="services-cta-h2">Need Help? Contact Us Today</h2>
-      <p id="services-cta-sub">Call for a free quote or to book your repair appointment.</p>
+      <h2 id="services-cta-h2">{ctaHeading}</h2>
+      <p id="services-cta-sub">{ctaSub}</p>
       <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
         <a href="/contact/" class="btn btn-secondary cta-invert">Book Now</a>
       </div>
     </div>
   </section>
-
-  <script src="/cms-fetch-services.js" defer></script>
 </Layout>

@@ -1,7 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { business } from '../config/business';
-import { DATA_ETHERNET_FALLBACK as d } from '../data/data-ethernet-fallback';
+import { getDataEthernetPageData } from '../utils/cms';
+
+const d = await getDataEthernetPageData();
 ---
 
 <Layout
@@ -150,8 +152,6 @@ import { DATA_ETHERNET_FALLBACK as d } from '../data/data-ethernet-fallback';
       <a href="#quote" class="btn btn-secondary cta-invert">Get a Free Quote</a>
     </div>
   </section>
-
-  <script src="/cms-fetch-data-ethernet.js" defer></script>
 </Layout>
 
 <style>
