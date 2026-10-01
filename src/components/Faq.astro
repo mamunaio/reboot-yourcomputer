@@ -1,164 +1,150 @@
 ---
-// Component: Faq.astro
+import type { FaqsSection } from '../lib/content-schema';
+import { BRISBANE_CCTV_FALLBACK } from '../data/cctv-brisbane-fallback';
+
+interface Props {
+  faqs?: FaqsSection;
+}
+
+const { faqs = BRISBANE_CCTV_FALLBACK.faqs } = Astro.props;
+const badge = faqs?.badge || BRISBANE_CCTV_FALLBACK.faqs.badge;
+const heading = faqs?.heading || BRISBANE_CCTV_FALLBACK.faqs.heading;
+const subheading = faqs?.subheading || BRISBANE_CCTV_FALLBACK.faqs.subheading;
+const faq1Q = faqs?.faq1Q || BRISBANE_CCTV_FALLBACK.faqs.faq1Q;
+const faq1A = faqs?.faq1A || BRISBANE_CCTV_FALLBACK.faqs.faq1A;
+const faq2Q = faqs?.faq2Q || BRISBANE_CCTV_FALLBACK.faqs.faq2Q;
+const faq2A = faqs?.faq2A || BRISBANE_CCTV_FALLBACK.faqs.faq2A;
+const faq3Q = faqs?.faq3Q || BRISBANE_CCTV_FALLBACK.faqs.faq3Q;
+const faq3A = faqs?.faq3A || BRISBANE_CCTV_FALLBACK.faqs.faq3A;
+const faq4Q = faqs?.faq4Q || BRISBANE_CCTV_FALLBACK.faqs.faq4Q;
+const faq4A = faqs?.faq4A || BRISBANE_CCTV_FALLBACK.faqs.faq4A;
+const faq5Q = faqs?.faq5Q || BRISBANE_CCTV_FALLBACK.faqs.faq5Q;
+const faq5A = faqs?.faq5A || BRISBANE_CCTV_FALLBACK.faqs.faq5A;
+const faq6Q = faqs?.faq6Q || BRISBANE_CCTV_FALLBACK.faqs.faq6Q;
+const faq6A = faqs?.faq6A || BRISBANE_CCTV_FALLBACK.faqs.faq6A;
+const faq7Q = faqs?.faq7Q || BRISBANE_CCTV_FALLBACK.faqs.faq7Q;
+const faq7A = faqs?.faq7A || BRISBANE_CCTV_FALLBACK.faqs.faq7A;
+const faq8Q = faqs?.faq8Q || BRISBANE_CCTV_FALLBACK.faqs.faq8Q;
+const faq8A = faqs?.faq8A || BRISBANE_CCTV_FALLBACK.faqs.faq8A;
+const faq9Q = faqs?.faq9Q || BRISBANE_CCTV_FALLBACK.faqs.faq9Q;
+const faq9A = faqs?.faq9A || BRISBANE_CCTV_FALLBACK.faqs.faq9A;
 ---
-<!-- 13. CCTV INSTALLATION FAQS -->
-<section id="faqs" class="py-20 bg-slate-50 dark:bg-slate-900/60 border-y border-slate-200 dark:border-white/10">
+
+<section class="py-16 lg:py-24 bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200/80 dark:border-white/10" id="faqs">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    
-    <div class="text-center max-w-3xl mx-auto mb-14">
-      <span class="text-xs font-black text-red-600 dark:text-red-400 uppercase tracking-widest px-3.5 py-1 rounded-full bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800/50 shadow-2xs">
-        Direct Answers
-      </span>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white mt-3 tracking-tight font-display">
-        Frequently Asked Security Questions
+
+    <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-700 dark:text-red-300">
+        <span>❓</span>
+        <span>{badge}</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white font-display">
+        {heading}
       </h2>
-      <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-2 leading-relaxed">
-        Straightforward, honest answers to the most common questions about CCTV cameras, cabling, and network security in Brisbane.
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400">
+        {subheading}
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl lg:max-w-6xl mx-auto items-start">
-      
-      <!-- Left Column: Odds -->
-      <div class="space-y-4">
-        
-        <!-- FAQ 1 -->
-        <div class="rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-all" id="faq-card-1">
-          <button type="button" onclick="toggleFaq(1)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
-            <span class="group-hover:text-red-600 transition-colors leading-snug">How much does CCTV installation cost?</span>
-            <span id="faq-icon-1" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all duration-300 select-none">+</span>
-          </button>
-          <div id="faq-wrapper-1" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-slate-800 mt-3">
-            A standard residential 4-camera 4K PoE wired system fully installed typically ranges between $1,490 and $1,990 including Dahua or Hikvision hardware, 2TB storage, hidden cabling, and mobile app setup. We provide 100% itemized upfront quotes with zero hidden surprises.
-          </div>
-        </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
 
-        <!-- FAQ 3 -->
-        <div class="rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-all" id="faq-card-3">
-          <button type="button" onclick="toggleFaq(3)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
-            <span class="group-hover:text-red-600 transition-colors leading-snug">Why choose wired PoE over wireless battery cameras?</span>
-            <span id="faq-icon-3" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all duration-300 select-none">+</span>
-          </button>
-          <div id="faq-wrapper-3" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-slate-800 mt-3">
-            Wireless cameras sleep to save battery, often missing the first 3-5 critical seconds of an intrusion, and can be jammed by $20 Wi-Fi jammers. Wired PoE records 24/7/365 at continuous full bitrate without Wi-Fi dropouts, recharging ladders, or cloud subscriptions.
-          </div>
+      <!-- FAQ 1 -->
+      <div class="rounded-2xl p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 shadow-sm transition-all" id="faq-card-1">
+        <button type="button" onclick="toggleFaq(1)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
+          <span class="group-hover:text-red-600 transition-colors leading-snug">{faq1Q}</span>
+          <span id="faq-icon-1" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all select-none">+</span>
+        </button>
+        <div id="faq-wrapper-1" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-white/10 mt-3">
+          {faq1A}
         </div>
-
-        <!-- FAQ 5 -->
-        <div class="rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-all" id="faq-card-5">
-          <button type="button" onclick="toggleFaq(5)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
-            <span class="group-hover:text-red-600 transition-colors leading-snug">Are there any monthly subscription fees?</span>
-            <span id="faq-icon-5" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all duration-300 select-none">+</span>
-          </button>
-          <div id="faq-wrapper-5" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-slate-800 mt-3">
-            None whatsoever! You own the hardware, and all video footage is recorded locally on your secure in-house NVR hard drive. The smartphone remote app (DMSS / Hik-Connect) is 100% free for life.
-          </div>
-        </div>
-
-        <!-- FAQ 7 -->
-        <div class="rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-all" id="faq-card-7">
-          <button type="button" onclick="toggleFaq(7)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
-            <span class="group-hover:text-red-600 transition-colors leading-snug">Can you conceal all cables inside my walls?</span>
-            <span id="faq-icon-7" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all duration-300 select-none">+</span>
-          </button>
-          <div id="faq-wrapper-7" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-slate-800 mt-3">
-            Yes. As ACMA-licensed data cablers, our standard practice is feeding Cat6 pure copper cabling through roof voids, wall cavities, and underfloor cavities so your home looks immaculate with zero visible wiring.
-          </div>
-        </div>
-
-        <!-- FAQ 9 -->
-        <div class="rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-all" id="faq-card-9">
-          <button type="button" onclick="toggleFaq(9)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
-            <span class="group-hover:text-red-600 transition-colors leading-snug">Do you install customer-supplied (BYO) cameras?</span>
-            <span id="faq-icon-9" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all duration-300 select-none">+</span>
-          </button>
-          <div id="faq-wrapper-9" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-slate-800 mt-3">
-            Yes! If you purchased cameras from Swan, Reolink, Eufy, or UniFi, we provide expert cabling, mounting, and network integration at our straightforward flat hourly rate.
-          </div>
-        </div>
-
-        <!-- FAQ 11 -->
-        <div class="rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-all" id="faq-card-11">
-          <button type="button" onclick="toggleFaq(11)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
-            <span class="group-hover:text-red-600 transition-colors leading-snug">What happens if my internet connection goes down?</span>
-            <span id="faq-icon-11" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all duration-300 select-none">+</span>
-          </button>
-          <div id="faq-wrapper-11" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-slate-800 mt-3">
-            Your system continues recording 24/7 without interruption. Because recording is handled locally via the PoE NVR hard drive, loss of internet only pauses outside phone alerts until connectivity resumes.
-          </div>
-        </div>
-
       </div>
 
-      <!-- Right Column: Evens -->
-      <div class="space-y-4">
-        
-        <!-- FAQ 2 -->
-        <div class="rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-all" id="faq-card-2">
-          <button type="button" onclick="toggleFaq(2)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
-            <span class="group-hover:text-red-600 transition-colors leading-snug">What warranty do you offer on hardware & workmanship?</span>
-            <span id="faq-icon-2" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all duration-300 select-none">+</span>
-          </button>
-          <div id="faq-wrapper-2" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-slate-800 mt-3">
-            All authentic Dahua and Hikvision equipment comes with a full 3-year Australian manufacturer warranty. Furthermore, we provide a 5-year guarantee on all cabling and installation workmanship.
-          </div>
+      <!-- FAQ 2 -->
+      <div class="rounded-2xl p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 shadow-sm transition-all" id="faq-card-2">
+        <button type="button" onclick="toggleFaq(2)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
+          <span class="group-hover:text-red-600 transition-colors leading-snug">{faq2Q}</span>
+          <span id="faq-icon-2" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all select-none">+</span>
+        </button>
+        <div id="faq-wrapper-2" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-white/10 mt-3">
+          {faq2A}
         </div>
+      </div>
 
-        <!-- FAQ 4 -->
-        <div class="rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-all" id="faq-card-4">
-          <button type="button" onclick="toggleFaq(4)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
-            <span class="group-hover:text-red-600 transition-colors leading-snug">How long does a typical installation take?</span>
-            <span id="faq-icon-4" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all duration-300 select-none">+</span>
-          </button>
-          <div id="faq-wrapper-4" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-slate-800 mt-3">
-            A standard 4-camera installation on a single-storey house is completed within 4 to 6 hours on the same day. Larger two-storey or commercial 8+ camera projects are completed within 1 to 2 days.
-          </div>
+      <!-- FAQ 3 -->
+      <div class="rounded-2xl p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 shadow-sm transition-all" id="faq-card-3">
+        <button type="button" onclick="toggleFaq(3)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
+          <span class="group-hover:text-red-600 transition-colors leading-snug">{faq3Q}</span>
+          <span id="faq-icon-3" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all select-none">+</span>
+        </button>
+        <div id="faq-wrapper-3" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-white/10 mt-3">
+          {faq3A}
         </div>
+      </div>
 
-        <!-- FAQ 6 -->
-        <div class="rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-all" id="faq-card-6">
-          <button type="button" onclick="toggleFaq(6)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
-            <span class="group-hover:text-red-600 transition-colors leading-snug">What is Active Deterrence and how does it prevent crime?</span>
-            <span id="faq-icon-6" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all duration-300 select-none">+</span>
-          </button>
-          <div id="faq-wrapper-6" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-slate-800 mt-3">
-            Standard cameras only record crime after it happens. Active Deterrence uses AI to detect human or vehicle intruders at your boundary, instantly triggering flashing red/blue strobe lights, an audible warning or siren, and sending an instant notification to your phone.
-          </div>
+      <!-- FAQ 4 -->
+      <div class="rounded-2xl p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 shadow-sm transition-all" id="faq-card-4">
+        <button type="button" onclick="toggleFaq(4)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
+          <span class="group-hover:text-red-600 transition-colors leading-snug">{faq4Q}</span>
+          <span id="faq-icon-4" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all select-none">+</span>
+        </button>
+        <div id="faq-wrapper-4" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-white/10 mt-3">
+          {faq4A}
         </div>
+      </div>
 
-        <!-- FAQ 8 -->
-        <div class="rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-all" id="faq-card-8">
-          <button type="button" onclick="toggleFaq(8)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
-            <span class="group-hover:text-red-600 transition-colors leading-snug">Do you charge travel fees or call-out charges?</span>
-            <span id="faq-icon-8" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all duration-300 select-none">+</span>
-          </button>
-          <div id="faq-wrapper-8" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-slate-800 mt-3">
-            No! Reboot operates with a strict $0 Call-Out Fee policy across Greater Brisbane, Ipswich, Logan, and surrounding suburbs.
-          </div>
+      <!-- FAQ 5 -->
+      <div class="rounded-2xl p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 shadow-sm transition-all" id="faq-card-5">
+        <button type="button" onclick="toggleFaq(5)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
+          <span class="group-hover:text-red-600 transition-colors leading-snug">{faq5Q}</span>
+          <span id="faq-icon-5" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all select-none">+</span>
+        </button>
+        <div id="faq-wrapper-5" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-white/10 mt-3">
+          {faq5A}
         </div>
+      </div>
 
-        <!-- FAQ 10 -->
-        <div class="rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-all" id="faq-card-10">
-          <button type="button" onclick="toggleFaq(10)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
-            <span class="group-hover:text-red-600 transition-colors leading-snug">Can multiple family members or managers access the app?</span>
-            <span id="faq-icon-10" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all duration-300 select-none">+</span>
-          </button>
-          <div id="faq-wrapper-10" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-slate-800 mt-3">
-            Yes. We set up user credentials on as many smartphones and tablets as needed, with optional granular permissions (e.g. view-only vs admin settings).
-          </div>
+      <!-- FAQ 6 -->
+      <div class="rounded-2xl p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 shadow-sm transition-all" id="faq-card-6">
+        <button type="button" onclick="toggleFaq(6)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
+          <span class="group-hover:text-red-600 transition-colors leading-snug">{faq6Q}</span>
+          <span id="faq-icon-6" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all select-none">+</span>
+        </button>
+        <div id="faq-wrapper-6" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-white/10 mt-3">
+          {faq6A}
         </div>
+      </div>
 
-        <!-- FAQ 12 -->
-        <div class="rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-all" id="faq-card-12">
-          <button type="button" onclick="toggleFaq(12)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
-            <span class="group-hover:text-red-600 transition-colors leading-snug">How do I book an installation or request a quote?</span>
-            <span id="faq-icon-12" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all duration-300 select-none">+</span>
-          </button>
-          <div id="faq-wrapper-12" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-slate-800 mt-3">
-            Simply fill out the quick quote form below or call us directly on (07) 3155 2002. We operate 7 days a week from 7 AM to 10 PM.
-          </div>
+      <!-- FAQ 7 -->
+      <div class="rounded-2xl p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 shadow-sm transition-all" id="faq-card-7">
+        <button type="button" onclick="toggleFaq(7)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
+          <span class="group-hover:text-red-600 transition-colors leading-snug">{faq7Q}</span>
+          <span id="faq-icon-7" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all select-none">+</span>
+        </button>
+        <div id="faq-wrapper-7" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-white/10 mt-3">
+          {faq7A}
         </div>
+      </div>
 
+      <!-- FAQ 8 -->
+      <div class="rounded-2xl p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 shadow-sm transition-all" id="faq-card-8">
+        <button type="button" onclick="toggleFaq(8)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
+          <span class="group-hover:text-red-600 transition-colors leading-snug">{faq8Q}</span>
+          <span id="faq-icon-8" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all select-none">+</span>
+        </button>
+        <div id="faq-wrapper-8" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-white/10 mt-3">
+          {faq8A}
+        </div>
+      </div>
+
+      <!-- FAQ 9 -->
+      <div class="rounded-2xl p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 shadow-sm transition-all md:col-span-2" id="faq-card-9">
+        <button type="button" onclick="toggleFaq(9)" class="w-full flex items-center justify-between text-left font-bold text-base text-slate-900 dark:text-white cursor-pointer group">
+          <span class="group-hover:text-red-600 transition-colors leading-snug">{faq9Q}</span>
+          <span id="faq-icon-9" class="w-7 h-7 rounded-full bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-mono ml-3 shrink-0 transition-all select-none">+</span>
+        </button>
+        <div id="faq-wrapper-9" class="hidden pt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-white/10 mt-3">
+          {faq9A}
+        </div>
       </div>
 
     </div>
@@ -175,13 +161,13 @@
     if (wrapper.classList.contains('hidden')) {
       wrapper.classList.remove('hidden');
       icon.textContent = '−';
-      icon.classList.add('rotate-180', 'bg-red-600', 'text-white');
+      icon.classList.add('bg-red-600', 'text-white');
       icon.classList.remove('bg-red-50', 'text-red-600');
       card.classList.add('border-red-500/50', 'shadow-md');
     } else {
       wrapper.classList.add('hidden');
       icon.textContent = '+';
-      icon.classList.remove('rotate-180', 'bg-red-600', 'text-white');
+      icon.classList.remove('bg-red-600', 'text-white');
       icon.classList.add('bg-red-50', 'text-red-600');
       card.classList.remove('border-red-500/50', 'shadow-md');
     }

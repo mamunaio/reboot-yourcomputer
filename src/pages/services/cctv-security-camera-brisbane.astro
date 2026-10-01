@@ -20,30 +20,55 @@ import Faq from '../../components/Faq.astro';
 import QuoteForm from '../../components/QuoteForm.astro';
 import WomBadges from '../../components/WomBadges.astro';
 import Footer from '../../components/Footer.astro';
+import { getBrisbaneCctvContent } from '../../lib/content-client';
+
+const content = await getBrisbaneCctvContent('brisbane');
+const {
+  site,
+  seo,
+  hero,
+  trust,
+  cabler,
+  awards,
+  services,
+  deterrence,
+  mobile_app,
+  inclusions,
+  comparison,
+  pricing,
+  process,
+  case_studies,
+  installer,
+  reviews,
+  suburbs,
+  faqs,
+  quote_form,
+  footer,
+} = content;
 ---
 
 <SecurityLayout
-  title="CCTV & Security Camera Installation Brisbane | Reboot Computer Repairs"
-  description="Commercial-grade hardwired 4K CCTV camera systems, secure Cat6 data cabling, and 24/7 mobile surveillance for Brisbane homes and businesses. Licensed ACMA cabler, $0 call-out fee."
+  title={seo.title}
+  description={seo.description}
 >
-  <Header />
-  <Hero />
-  <TrustBadges />
-  <MasterCablerSection />
-  <FeaturedAwards />
-  <ServicesGrid />
-  <ActiveDeterrenceShowcase />
-  <MobileAppViewer />
-  <Inclusions />
-  <SystemComparison />
-  <PricingPackages />
-  <ProcessSteps />
-  <LocalCaseStudy />
-  <InstallerProfile />
-  <Reviews />
-  <SuburbGrid />
-  <Faq />
-  <QuoteForm />
-  <WomBadges />
-  <Footer />
+  <Header site={site} />
+  <Hero hero={hero} site={site} />
+  <TrustBadges trust={trust} />
+  <MasterCablerSection cabler={cabler} site={site} />
+  <FeaturedAwards awards={awards} />
+  <ServicesGrid services={services} />
+  <ActiveDeterrenceShowcase deterrence={deterrence} />
+  <MobileAppViewer mobile_app={mobile_app} site={site} />
+  <Inclusions inclusions={inclusions} />
+  <SystemComparison comparison={comparison} />
+  <PricingPackages pricing={pricing} />
+  <ProcessSteps process={process} />
+  <LocalCaseStudy case_studies={case_studies} />
+  <InstallerProfile installer={installer} site={site} />
+  <Reviews reviews={reviews} />
+  <SuburbGrid suburbs={suburbs} site={site} />
+  <Faq faqs={faqs} />
+  <QuoteForm quote_form={quote_form} site={site} />
+  <WomBadges awards={awards} />
+  <Footer footer={footer} site={site} />
 </SecurityLayout>

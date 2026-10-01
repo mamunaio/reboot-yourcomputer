@@ -1,86 +1,61 @@
 ---
-// Component: ProcessSteps.astro
+import type { ProcessSection } from '../lib/content-schema';
+import { BRISBANE_CCTV_FALLBACK } from '../data/cctv-brisbane-fallback';
+
+interface Props {
+  process?: ProcessSection;
+}
+
+const { process = BRISBANE_CCTV_FALLBACK.process } = Astro.props;
+const badge = process?.badge || BRISBANE_CCTV_FALLBACK.process.badge;
+const heading = process?.heading || BRISBANE_CCTV_FALLBACK.process.heading;
+const step1Title = process?.step1Title || BRISBANE_CCTV_FALLBACK.process.step1Title;
+const step1Desc = process?.step1Desc || BRISBANE_CCTV_FALLBACK.process.step1Desc;
+const step2Title = process?.step2Title || BRISBANE_CCTV_FALLBACK.process.step2Title;
+const step2Desc = process?.step2Desc || BRISBANE_CCTV_FALLBACK.process.step2Desc;
+const step3Title = process?.step3Title || BRISBANE_CCTV_FALLBACK.process.step3Title;
+const step3Desc = process?.step3Desc || BRISBANE_CCTV_FALLBACK.process.step3Desc;
+const step4Title = process?.step4Title || BRISBANE_CCTV_FALLBACK.process.step4Title;
+const step4Desc = process?.step4Desc || BRISBANE_CCTV_FALLBACK.process.step4Desc;
 ---
-<!-- 8. PROCESS: HOW CCTV INSTALLATION WORKS -->
-<section class="py-20 bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200/80 dark:border-white/10">
+
+<section class="py-16 lg:py-24 bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-white/10" id="process">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    
-    <div class="text-center max-w-3xl mx-auto mb-16">
-      <span class="text-xs font-black text-red-600 dark:text-red-400 uppercase tracking-widest px-3.5 py-1 rounded-full bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800/50 shadow-2xs">
-        Streamlined 4-Step Process
-      </span>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white mt-3 tracking-tight font-display">
-        How Our Security Installation Works
+
+    <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-700 dark:text-red-300">
+        <span>🛠️</span>
+        <span>{badge}</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white font-display">
+        {heading}
       </h2>
-      <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-2 leading-relaxed">
-        From your initial enquiry to mobile handover: transparent, prompt, and zero mess left behind.
-      </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-      
-      <!-- Step 1 -->
-      <div class="p-7 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all relative flex flex-col justify-between group">
-        <div>
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-600 to-red-500 text-white font-black flex items-center justify-center text-lg mb-5 shadow-lg shadow-red-600/25 group-hover:scale-105 transition-transform">
-            1
-          </div>
-          <h3 class="text-lg font-black text-slate-900 dark:text-white mb-2 font-display">Property Consultation</h3>
-          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-            Tell us about your property layout, blind spots, and security goals. We review roof cavity access and provide a firm, itemized quote.
-          </p>
-        </div>
-        <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs font-bold text-red-600 dark:text-red-400 flex items-center gap-1.5">
-          <span>✓ 100% Free & No-Obligation</span>
-        </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-white/5 space-y-3 relative">
+        <div class="text-3xl font-black text-red-600 font-display">01</div>
+        <h3 class="text-lg font-black text-slate-900 dark:text-white font-display">{step1Title}</h3>
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{step1Desc}</p>
       </div>
 
-      <!-- Step 2 -->
-      <div class="p-7 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all relative flex flex-col justify-between group">
-        <div>
-          <div class="w-12 h-12 rounded-2xl bg-slate-900 dark:bg-slate-800 text-white font-black flex items-center justify-center text-lg mb-5 shadow-lg shadow-slate-900/10 group-hover:scale-105 transition-transform">
-            2
-          </div>
-          <h3 class="text-lg font-black text-slate-900 dark:text-white mb-2 font-display">Hidden Cat6 Cabling</h3>
-          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-            Our ACMA-licensed cabler feeds 100% pure copper Cat6 cabling inside wall cavities and roof voids. Zero ugly dangling wires.
-          </p>
-        </div>
-        <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-          <span>✓ ACMA Rules Compliant</span>
-        </div>
+      <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-white/5 space-y-3 relative">
+        <div class="text-3xl font-black text-red-600 font-display">02</div>
+        <h3 class="text-lg font-black text-slate-900 dark:text-white font-display">{step2Title}</h3>
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{step2Desc}</p>
       </div>
 
-      <!-- Step 3 -->
-      <div class="p-7 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all relative flex flex-col justify-between group">
-        <div>
-          <div class="w-12 h-12 rounded-2xl bg-slate-900 dark:bg-slate-800 text-white font-black flex items-center justify-center text-lg mb-5 shadow-lg shadow-slate-900/10 group-hover:scale-105 transition-transform">
-            3
-          </div>
-          <h3 class="text-lg font-black text-slate-900 dark:text-white mb-2 font-display">Mounting & Precision Setup</h3>
-          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-            Cameras are weatherproofed and aimed to eliminate blind spots. NVR recorder and firewall are secured on your private subnet.
-          </p>
-        </div>
-        <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-          <span>✓ Zero Monthly Fees</span>
-        </div>
+      <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-white/5 space-y-3 relative">
+        <div class="text-3xl font-black text-red-600 font-display">03</div>
+        <h3 class="text-lg font-black text-slate-900 dark:text-white font-display">{step3Title}</h3>
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{step3Desc}</p>
       </div>
 
-      <!-- Step 4 -->
-      <div class="p-7 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all relative flex flex-col justify-between group">
-        <div>
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-600 to-red-500 text-white font-black flex items-center justify-center text-lg mb-5 shadow-lg shadow-red-600/25 group-hover:scale-105 transition-transform">
-            4
-          </div>
-          <h3 class="text-lg font-black text-slate-900 dark:text-white mb-2 font-display">Phone App & Handover</h3>
-          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-            We set up the live viewing app on all your family or staff phones, calibrate AI human/vehicle alerts, and provide full training.
-          </p>
-        </div>
-        <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs font-bold text-red-600 dark:text-red-400 flex items-center gap-1.5">
-          <span>✓ Ready on iOS & Android</span>
-        </div>
+      <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-white/5 space-y-3 relative">
+        <div class="text-3xl font-black text-red-600 font-display">04</div>
+        <h3 class="text-lg font-black text-slate-900 dark:text-white font-display">{step4Title}</h3>
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{step4Desc}</p>
       </div>
 
     </div>

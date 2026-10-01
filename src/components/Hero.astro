@@ -1,126 +1,175 @@
 ---
 import { business } from '../config/business';
+import type { HeroSection, SiteSection } from '../lib/content-schema';
+import { BRISBANE_CCTV_FALLBACK } from '../data/cctv-brisbane-fallback';
+
+interface Props {
+  hero?: HeroSection;
+  site?: SiteSection;
+}
+
+const {
+  hero = BRISBANE_CCTV_FALLBACK.hero,
+  site = BRISBANE_CCTV_FALLBACK.site,
+} = Astro.props;
+
+const phone = site?.phone || business.phone;
+const phoneHref = site?.phoneHref || business.phoneHref;
+const badgeText = hero?.badgeText || BRISBANE_CCTV_FALLBACK.hero.badgeText;
+const awardText = hero?.awardText || BRISBANE_CCTV_FALLBACK.hero.awardText;
+const heading = hero?.heading || BRISBANE_CCTV_FALLBACK.hero.heading;
+const description = hero?.description || BRISBANE_CCTV_FALLBACK.hero.description;
+const bullet1 = hero?.bullet1 || BRISBANE_CCTV_FALLBACK.hero.bullet1;
+const bullet2 = hero?.bullet2 || BRISBANE_CCTV_FALLBACK.hero.bullet2;
+const bullet3 = hero?.bullet3 || BRISBANE_CCTV_FALLBACK.hero.bullet3;
+const bullet4 = hero?.bullet4 || BRISBANE_CCTV_FALLBACK.hero.bullet4;
+const ctaQuote = hero?.ctaQuote || BRISBANE_CCTV_FALLBACK.hero.ctaQuote;
+const ctaPricing = hero?.ctaPricing || BRISBANE_CCTV_FALLBACK.hero.ctaPricing;
+const imageUrl = hero?.imageUrl || BRISBANE_CCTV_FALLBACK.hero.imageUrl;
+const metric1Value = hero?.metric1Value || BRISBANE_CCTV_FALLBACK.hero.metric1Value;
+const metric1Label = hero?.metric1Label || BRISBANE_CCTV_FALLBACK.hero.metric1Label;
+const metric2Value = hero?.metric2Value || BRISBANE_CCTV_FALLBACK.hero.metric2Value;
+const metric2Label = hero?.metric2Label || BRISBANE_CCTV_FALLBACK.hero.metric2Label;
+const metric3Value = hero?.metric3Value || BRISBANE_CCTV_FALLBACK.hero.metric3Value;
+const metric3Label = hero?.metric3Label || BRISBANE_CCTV_FALLBACK.hero.metric3Label;
 ---
 
-<!-- HERO SECTION (CLEAN MODERN LIGHT THEME) -->
-<section class="relative pt-10 pb-16 lg:pt-16 lg:pb-24 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 border-b border-slate-200/80 dark:border-white/10" id="hero-section">
-  
-  <!-- Subtle decorative ambient background elements -->
-  <div class="absolute top-0 right-1/4 w-96 h-96 bg-red-500/5 dark:bg-red-500/10 rounded-full blur-3xl pointer-events-none"></div>
-  <div class="absolute bottom-0 left-10 w-96 h-96 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+<section class="relative overflow-hidden pt-8 pb-16 lg:pt-14 lg:pb-24 border-b border-slate-200/80 dark:border-white/10 bg-gradient-to-b from-white via-slate-50/50 to-white dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+
+  <!-- Subtle Background Grid & Glows -->
+  <div class="absolute inset-0 bg-light-grid pointer-events-none opacity-60"></div>
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-red-600/10 dark:bg-red-600/15 blur-[120px] rounded-full pointer-events-none"></div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-      
-      <!-- Hero Left Column -->
-      <div class="lg:col-span-7 space-y-6">
-        
-        <!-- Live Dispatch Ticker -->
-        <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 text-xs font-bold shadow-sm">
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping shrink-0"></span>
-          <span class="font-extrabold text-red-600 uppercase tracking-wider">On-Duty in Greater Brisbane</span>
-          <span class="text-slate-300 dark:text-slate-600">•</span>
-          <span class="text-slate-600 dark:text-slate-400">$0 Call-Out Fees</span>
+
+      <!-- Left Column: Copy & Value Proposition -->
+      <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+
+        <!-- Trust Badge Pills -->
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black tracking-wider uppercase bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-700 dark:text-red-300 shadow-2xs">
+            <span class="w-1.5 h-1.5 rounded-full bg-red-600 animate-ping"></span>
+            <span>{badgeText}</span>
+          </span>
+
+          <a href="#wom-awards" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800/60 text-amber-800 dark:text-amber-300 hover:scale-105 transition-transform shadow-2xs">
+            <span>🏆</span>
+            <span>{awardText}</span>
+          </a>
         </div>
 
-        <!-- Main H1 Headline -->
-        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1] font-display">
-          CCTV &amp; Security Camera Installation in <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-orange-600 to-red-600">Brisbane</span>
+        <!-- H1 Headline -->
+        <h1 class="text-3xl sm:text-5xl lg:text-5xl xl:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1] font-display">
+          {heading}
         </h1>
 
         <!-- Lead Paragraph -->
-        <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
-          Commercial-grade hardwired 4K CCTV camera systems, secure Cat6 data cabling, network firewalls, and 24/7 smartphone surveillance. Installed with clean concealed wiring by licensed ACMA cablers &ndash; with zero ongoing monthly subscription fees.
+        <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+          {description}
         </p>
 
-        <!-- Feature Chips -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1 text-xs font-bold text-slate-700 dark:text-slate-300">
-          <div class="flex items-center gap-2 p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-xs">
-            <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-            <span>$0 Monthly Fees</span>
+        <!-- Key Bullet Points with Icons -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-left max-w-xl mx-auto lg:mx-0">
+          <div class="flex items-center gap-2.5 text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200">
+            <div class="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <span>{bullet1}</span>
           </div>
-          <div class="flex items-center gap-2 p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-xs">
-            <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-            <span>Solid Copper Cat6</span>
+
+          <div class="flex items-center gap-2.5 text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200">
+            <div class="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <span>{bullet2}</span>
           </div>
-          <div class="flex items-center gap-2 p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-xs">
-            <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-            <span>5-Yr Workmanship</span>
+
+          <div class="flex items-center gap-2.5 text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200">
+            <div class="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <span>{bullet3}</span>
+          </div>
+
+          <div class="flex items-center gap-2.5 text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200">
+            <div class="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <span>{bullet4}</span>
           </div>
         </div>
 
-        <!-- Button Row -->
-        <div class="pt-2 flex flex-wrap items-center gap-4">
-          <a href="#quote" class="px-8 py-4 rounded-xl bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-600 text-white font-black text-xs uppercase tracking-wider shadow-xl shadow-red-600/25 inline-flex items-center gap-2.5 transform hover:-translate-y-0.5 transition-all">
+        <!-- CTA Actions -->
+        <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+          <a
+            href="#quote"
+            class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-600 text-white font-black text-xs uppercase tracking-wider shadow-lg shadow-red-600/25 hover:shadow-xl hover:shadow-red-600/35 transform hover:-translate-y-0.5 transition-all text-center inline-flex items-center justify-center gap-2"
+          >
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            Request a Free Quote
+            <span>{ctaQuote}</span>
           </a>
 
-          <a href="#pricing" class="px-6 py-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/15 text-slate-800 dark:text-white hover:border-red-500 font-bold text-xs uppercase tracking-wider shadow-sm transition-all inline-flex items-center gap-2">
-            <span>View Packages</span>
-            <span class="text-red-500">&darr;</span>
-          </a>
-
-          <a href={business.phoneHref} class="px-5 py-4 rounded-xl text-slate-700 dark:text-slate-300 hover:text-red-600 font-bold text-xs uppercase tracking-wider transition-all inline-flex items-center gap-2">
-            <svg class="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
-            <span>Call {business.phone}</span>
+          <a
+            href="#pricing"
+            class="w-full sm:w-auto px-7 py-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-white/15 text-slate-800 dark:text-white hover:border-red-500 font-bold text-xs uppercase tracking-wider shadow-2xs hover:shadow-md transition-all text-center inline-flex items-center justify-center gap-2"
+          >
+            <span>{ctaPricing}</span>
+            <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </a>
         </div>
 
-        <!-- Rapid Suburb Tag Pills -->
-        <div class="pt-4 border-t border-slate-200 dark:border-white/10 space-y-2">
-          <div class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-            Quick Suburb Check (Click to Pre-fill):
+        <!-- Micro-Metrics Strip -->
+        <div class="pt-6 border-t border-slate-200/80 dark:border-white/10 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-center">
+          <div>
+            <div class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white font-display">{metric1Value}</div>
+            <div class="text-[11px] text-slate-500 dark:text-slate-400 font-semibold mt-0.5">{metric1Label}</div>
           </div>
-          <div class="flex flex-wrap items-center gap-1.5 text-xs font-semibold">
-            <button onclick="selectSuburbForQuote('Brisbane CBD (4000)')" class="px-3 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-red-500 hover:bg-red-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all cursor-pointer shadow-2xs">Brisbane CBD</button>
-            <button onclick="selectSuburbForQuote('Chermside (4032)')" class="px-3 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-red-500 hover:bg-red-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all cursor-pointer shadow-2xs">Chermside</button>
-            <button onclick="selectSuburbForQuote('Carindale (4152)')" class="px-3 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-red-500 hover:bg-red-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all cursor-pointer shadow-2xs">Carindale</button>
-            <button onclick="selectSuburbForQuote('Sunnybank (4109)')" class="px-3 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-red-500 hover:bg-red-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all cursor-pointer shadow-2xs">Sunnybank</button>
-            <button onclick="selectSuburbForQuote('North Lakes (4509)')" class="px-3 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-red-500 hover:bg-red-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all cursor-pointer shadow-2xs">North Lakes</button>
-            <button onclick="selectSuburbForQuote('Logan (4114)')" class="px-3 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-red-500 hover:bg-red-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all cursor-pointer shadow-2xs">Logan</button>
-            <button onclick="selectSuburbForQuote('Ipswich (4305)')" class="px-3 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-red-500 hover:bg-red-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all cursor-pointer shadow-2xs">Ipswich</button>
+          <div class="border-x border-slate-200 dark:border-white/10">
+            <div class="text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-400 font-display">{metric2Value}</div>
+            <div class="text-[11px] text-slate-500 dark:text-slate-400 font-semibold mt-0.5">{metric2Label}</div>
+          </div>
+          <div>
+            <div class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white font-display">{metric3Value}</div>
+            <div class="text-[11px] text-slate-500 dark:text-slate-400 font-semibold mt-0.5">{metric3Label}</div>
           </div>
         </div>
 
       </div>
 
-      <!-- Hero Right Column: Camera Image Card (Clean Bezel Light Presentation) -->
+      <!-- Right Column: Hero Visual Showcase -->
       <div class="lg:col-span-5">
         <div class="relative mx-auto max-w-md lg:max-w-none group">
-          
-          <!-- Soft Drop Shadow Container -->
-          <div class="relative rounded-3xl p-2 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/15 shadow-2xl shadow-slate-300/60 dark:shadow-black/50 transition-all duration-500 group-hover:shadow-red-500/10">
-            
-            <div class="relative rounded-2xl overflow-hidden aspect-[941/1200] bg-slate-950">
-              <img 
-                src="/3-brands-in-a-single-shot.png" 
-                alt="Commercial Dahua, Hikvision, and HiLook 4K security cameras professionally installed in Brisbane" 
-                class="w-full h-full object-cover object-top transform group-hover:scale-102 transition-transform duration-700"
+
+          <!-- Outer Card Container -->
+          <div class="relative rounded-3xl p-2 bg-white dark:bg-slate-800 border border-slate-200/90 dark:border-white/15 shadow-2xl shadow-slate-200/80 dark:shadow-black/70 transition-all duration-500 hover:shadow-red-600/10">
+
+            <div class="relative rounded-2xl overflow-hidden aspect-[4/3] bg-slate-950 flex items-center justify-center">
+
+              <!-- Hardware Image Composite -->
+              <img
+                src={imageUrl}
+                alt="4K Dahua TiOC, Hikvision AcuSense, and Uniview Security Camera Range"
+                class="w-full h-full object-cover object-center transform group-hover:scale-103 transition-transform duration-700"
                 loading="eager"
               />
 
-              <!-- Top Live Camera OSD Overlay -->
-              <div class="absolute top-3 inset-x-3 flex items-center justify-between pointer-events-none z-10">
-                <div class="px-3 py-1 rounded-full bg-slate-900/85 backdrop-blur-md border border-white/20 text-white text-[11px] font-mono font-bold flex items-center gap-1.5 shadow-md">
-                  <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
-                  <span>LIVE 4K NVR FEED</span>
-                </div>
-                <div class="px-2.5 py-1 rounded-md bg-black/70 backdrop-blur-md text-emerald-400 font-mono text-[10px] font-bold">
-                  PoE CONNECTED
-                </div>
+              <!-- Floating Status Badge -->
+              <div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-slate-900/85 backdrop-blur-md border border-white/20 text-white text-[11px] font-bold flex items-center gap-1.5 shadow-lg z-10">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>4K Ultra HD • Hardwired PoE</span>
               </div>
 
-              <!-- Bottom Hardware Specs Strip -->
+              <!-- Floating Feature Chip -->
               <div class="absolute bottom-3 inset-x-3 p-3 rounded-xl bg-slate-950/85 backdrop-blur-md border border-white/15 text-white flex items-center justify-between shadow-xl z-10">
                 <div>
                   <div class="text-xs font-black tracking-tight text-white font-display">
-                    Commercial 4K Turrets &amp; NVR
+                    Dahua TiOC • Hikvision • Uniview
                   </div>
-                  <div class="text-[10px] text-slate-300">Dahua • Hikvision • HiLook Solid PoE</div>
+                  <p class="text-[10px] text-slate-300">Active deterrence sirens &amp; strobe defence</p>
                 </div>
-                <span class="px-2 py-0.5 rounded bg-red-600 text-white font-mono text-[9px] font-bold uppercase tracking-wider">
-                  Zero Cloud Fees
+                <span class="px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-red-600 text-white">
+                  Commercial
                 </span>
               </div>
 
@@ -134,4 +183,3 @@ import { business } from '../config/business';
     </div>
   </div>
 </section>
-

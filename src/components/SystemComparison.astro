@@ -1,139 +1,78 @@
 ---
-// Component: SystemComparison.astro
+import type { ComparisonSection } from '../lib/content-schema';
+import { BRISBANE_CCTV_FALLBACK } from '../data/cctv-brisbane-fallback';
+
+interface Props {
+  comparison?: ComparisonSection;
+}
+
+const { comparison = BRISBANE_CCTV_FALLBACK.comparison } = Astro.props;
+const badge = comparison?.badge || BRISBANE_CCTV_FALLBACK.comparison.badge;
+const heading = comparison?.heading || BRISBANE_CCTV_FALLBACK.comparison.heading;
+const subheading = comparison?.subheading || BRISBANE_CCTV_FALLBACK.comparison.subheading;
+const col1Title = comparison?.col1Title || BRISBANE_CCTV_FALLBACK.comparison.col1Title;
+const col1Badge = comparison?.col1Badge || BRISBANE_CCTV_FALLBACK.comparison.col1Badge;
+const col1Desc = comparison?.col1Desc || BRISBANE_CCTV_FALLBACK.comparison.col1Desc;
+const col2Title = comparison?.col2Title || BRISBANE_CCTV_FALLBACK.comparison.col2Title;
+const col2Badge = comparison?.col2Badge || BRISBANE_CCTV_FALLBACK.comparison.col2Badge;
+const col2Desc = comparison?.col2Desc || BRISBANE_CCTV_FALLBACK.comparison.col2Desc;
+const col3Title = comparison?.col3Title || BRISBANE_CCTV_FALLBACK.comparison.col3Title;
+const col3Badge = comparison?.col3Badge || BRISBANE_CCTV_FALLBACK.comparison.col3Badge;
+const col3Desc = comparison?.col3Desc || BRISBANE_CCTV_FALLBACK.comparison.col3Desc;
 ---
-<!-- DECISION GUIDE -->
-<section id="comparison" class="py-20 bg-white dark:bg-slate-950 border-b border-slate-200/80 dark:border-white/10">
+
+<section class="py-16 lg:py-24 bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-white/10" id="comparison">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    
-    <div class="text-center max-w-3xl mx-auto mb-14">
-      <span class="text-xs font-black text-red-600 dark:text-red-400 uppercase tracking-widest px-3.5 py-1 rounded-full bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800/50 shadow-2xs">
-        Buyer's Technical Advice
-      </span>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white mt-3 tracking-tight font-display">
-        Which Security System Suits Your Property?
+
+    <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/60 text-blue-700 dark:text-blue-300">
+        <span>⚖️</span>
+        <span>{badge}</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white font-display">
+        {heading}
       </h2>
-      <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-2 leading-relaxed">
-        An honest technical breakdown of camera technologies, trade-offs, and practical considerations for Brisbane property owners.
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400">
+        {subheading}
       </p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      
-      <!-- Card 1: Wired PoE (Recommended) -->
-      <div class="p-8 rounded-3xl bg-white dark:bg-slate-900 border-2 border-red-500/80 shadow-xl shadow-red-500/5 flex flex-col justify-between relative">
-        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full bg-red-600 text-white text-[10px] font-black uppercase tracking-wider shadow-sm">
-          Recommended Choice
-        </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-        <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 dark:bg-red-950/60 text-red-700 dark:text-red-300 text-xs font-bold mb-4">
-            COMMERCIAL PoE STANDARD
-          </div>
-          <h3 class="text-2xl font-black text-slate-900 dark:text-white mb-2 font-display">Hardwired 4K PoE</h3>
-          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
-            Continuous local recording and a dedicated solid Cat6 copper connection. Powered over Ethernet directly from the central NVR recorder.
-          </p>
-
-          <div class="space-y-3 text-sm text-slate-700 dark:text-slate-200 border-t border-slate-200 dark:border-white/10 pt-4 mb-6">
-            <div class="flex items-start gap-2.5">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span><strong>24/7 Continuous Recording:</strong> Never misses an event or clips seconds late.</span>
-            </div>
-            <div class="flex items-start gap-2.5">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span><strong>Immune to Wi-Fi Jammers:</strong> Solid copper cable cannot be jammed or disconnected.</span>
-            </div>
-            <div class="flex items-start gap-2.5">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span><strong>$0 Monthly Subscription:</strong> All video stored on local surveillance hard drive.</span>
-            </div>
-            <div class="flex items-start gap-2.5">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span><strong>No Batteries to Recharge:</strong> Maintenance-free operation for 10+ years.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-red-50/60 dark:bg-red-950/40 border border-red-200 dark:border-red-900/40 text-xs text-slate-800 dark:text-slate-200">
-          <strong class="font-bold text-red-700 dark:text-red-400 block font-display">Best For:</strong>
-          Homeowners, detached homes, retail shops, offices, and long-term security.
+      <!-- Option 1: Hardwired 4K PoE (Recommended) -->
+      <div class="rounded-2xl p-7 bg-red-50/40 dark:bg-red-950/20 border-2 border-red-500 shadow-lg space-y-4 flex flex-col justify-between relative">
+        <div class="space-y-3">
+          <span class="px-2.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-red-600 text-white">
+            {col1Badge}
+          </span>
+          <h3 class="text-2xl font-black text-slate-900 dark:text-white font-display">{col1Title}</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{col1Desc}</p>
         </div>
       </div>
 
-      <!-- Card 2: Wi-Fi / Battery Cameras -->
-      <div class="p-8 rounded-3xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-white/10 flex flex-col justify-between">
-        <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold mb-4">
-            WIRELESS ALTERNATIVE
-          </div>
-          <h3 class="text-2xl font-black text-slate-900 dark:text-white mb-2 font-display">Wireless Battery Cams</h3>
-          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
-            Convenient for rental properties where you cannot drill holes, but compromised by battery fatigue, wake-up lag, and ongoing subscription bills.
-          </p>
-
-          <div class="space-y-3 text-sm text-slate-600 dark:text-slate-300 border-t border-slate-200 dark:border-white/10 pt-4 mb-6">
-            <div class="flex items-start gap-2.5">
-              <span class="text-amber-500 font-bold">•</span>
-              <span><strong>Motion-Only Recording:</strong> Sleeps to save battery, often missing the start of incidents.</span>
-            </div>
-            <div class="flex items-start gap-2.5">
-              <span class="text-amber-500 font-bold">•</span>
-              <span><strong>Wi-Fi Vulnerability:</strong> Can be easily knocked offline by cheap signal jammers.</span>
-            </div>
-            <div class="flex items-start gap-2.5">
-              <span class="text-amber-500 font-bold">•</span>
-              <span><strong>Expensive Cloud Fees:</strong> $15–$30/month subscriptions per camera.</span>
-            </div>
-            <div class="flex items-start gap-2.5">
-              <span class="text-amber-500 font-bold">•</span>
-              <span><strong>Battery Maintenance:</strong> Must take down and recharge every 1–3 months.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-xs text-slate-700 dark:text-slate-300">
-          <strong class="font-bold text-slate-900 dark:text-white block font-display">Best For:</strong>
-          Rental apartments and short-term leases with strict no-drilling rules.
+      <!-- Option 2: Wireless Battery -->
+      <div class="glass-box rounded-2xl p-7 space-y-4 flex flex-col justify-between">
+        <div class="space-y-3">
+          <span class="px-2.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
+            {col2Badge}
+          </span>
+          <h3 class="text-2xl font-black text-slate-900 dark:text-white font-display">{col2Title}</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{col2Desc}</p>
         </div>
       </div>
 
-      <!-- Card 3: Analogue Coax Upgrades -->
-      <div class="p-8 rounded-3xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-white/10 flex flex-col justify-between">
-        <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 text-xs font-bold mb-4">
-            LEGACY RETROFIT
-          </div>
-          <h3 class="text-2xl font-black text-slate-900 dark:text-white mb-2 font-display">Analogue-to-IP Upgrade</h3>
-          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
-            Have an old grainy CCTV system with existing coaxial cables? We upgrade your cameras and DVR to crisp 4K without having to rewire your entire home.
-          </p>
-
-          <div class="space-y-3 text-sm text-slate-600 dark:text-slate-300 border-t border-slate-200 dark:border-white/10 pt-4 mb-6">
-            <div class="flex items-start gap-2.5">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span><strong>Reuses Existing Cabling:</strong> Saves money on complex multi-storey cable pulls.</span>
-            </div>
-            <div class="flex items-start gap-2.5">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span><strong>Massive Clarity Jump:</strong> Upgrade from 720p/1080p to crystal-clear 4K.</span>
-            </div>
-            <div class="flex items-start gap-2.5">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span><strong>Modern Mobile App:</strong> View feeds on iOS and Android with zero monthly fees.</span>
-            </div>
-            <div class="flex items-start gap-2.5">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span><strong>New Hardware Warranty:</strong> 3-Year replacement equipment warranty.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-xs text-slate-700 dark:text-slate-300">
-          <strong class="font-bold text-slate-900 dark:text-white block font-display">Best For:</strong>
-          Homes and commercial buildings with existing pre-wired coax cables.
+      <!-- Option 3: Analogue Retrofit -->
+      <div class="glass-box rounded-2xl p-7 space-y-4 flex flex-col justify-between">
+        <div class="space-y-3">
+          <span class="px-2.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300">
+            {col3Badge}
+          </span>
+          <h3 class="text-2xl font-black text-slate-900 dark:text-white font-display">{col3Title}</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{col3Desc}</p>
         </div>
       </div>
 
     </div>
+
   </div>
 </section>

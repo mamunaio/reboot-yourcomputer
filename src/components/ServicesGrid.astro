@@ -1,163 +1,112 @@
 ---
-// Component: ServicesGrid.astro
+import type { ServicesSection } from '../lib/content-schema';
+import { BRISBANE_CCTV_FALLBACK } from '../data/cctv-brisbane-fallback';
+
+interface Props {
+  services?: ServicesSection;
+}
+
+const { services = BRISBANE_CCTV_FALLBACK.services } = Astro.props;
+const heading = services?.heading || BRISBANE_CCTV_FALLBACK.services.heading;
+const intro = services?.intro || BRISBANE_CCTV_FALLBACK.services.intro;
+const card1Title = services?.card1Title || BRISBANE_CCTV_FALLBACK.services.card1Title;
+const card1Desc = services?.card1Desc || BRISBANE_CCTV_FALLBACK.services.card1Desc;
+const card2Title = services?.card2Title || BRISBANE_CCTV_FALLBACK.services.card2Title;
+const card2Desc = services?.card2Desc || BRISBANE_CCTV_FALLBACK.services.card2Desc;
+const card3Title = services?.card3Title || BRISBANE_CCTV_FALLBACK.services.card3Title;
+const card3Desc = services?.card3Desc || BRISBANE_CCTV_FALLBACK.services.card3Desc;
+const card4Title = services?.card4Title || BRISBANE_CCTV_FALLBACK.services.card4Title;
+const card4Desc = services?.card4Desc || BRISBANE_CCTV_FALLBACK.services.card4Desc;
+const card5Title = services?.card5Title || BRISBANE_CCTV_FALLBACK.services.card5Title;
+const card5Desc = services?.card5Desc || BRISBANE_CCTV_FALLBACK.services.card5Desc;
+const card6Title = services?.card6Title || BRISBANE_CCTV_FALLBACK.services.card6Title;
+const card6Desc = services?.card6Desc || BRISBANE_CCTV_FALLBACK.services.card6Desc;
 ---
-<!-- COMPREHENSIVE SECURITY & IT SERVICES -->
-<section id="services" class="py-20 bg-slate-50 dark:bg-slate-900/40 border-b border-slate-200/80 dark:border-white/10">
+
+<section class="py-16 lg:py-24 bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-white/10" id="services">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    
-    <div class="text-center max-w-3xl mx-auto mb-14">
-      <span class="text-xs font-black text-red-600 dark:text-red-400 uppercase tracking-widest px-3.5 py-1 rounded-full bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800/50 shadow-2xs">
-        What We Protect
-      </span>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white mt-3 tracking-tight font-display">
-        Complete Security & Network Services
+
+    <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-700 dark:text-red-300">
+        <span>🔒</span>
+        <span>SECURITY & NETWORK SOLUTIONS</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white font-display">
+        {heading}
       </h2>
-      <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-2 leading-relaxed">
-        Commercial-grade physical surveillance combined with expert IT network security for Brisbane homes, offices, retail spaces, and warehouses.
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400">
+        {intro}
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-      
-      <!-- Card 1: Home CCTV -->
-      <div class="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-red-500/50 transition-all flex flex-col justify-between group">
-        <div>
-          <div class="flex items-center justify-between mb-5">
-            <div class="w-12 h-12 rounded-2xl bg-red-50 dark:bg-red-950/60 text-red-600 dark:text-red-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-            </div>
-            <span class="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-red-50 dark:bg-red-950 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800/50">
-              Residential
-            </span>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- Card 1 -->
+      <div class="glass-box rounded-2xl p-7 flex flex-col justify-between group">
+        <div class="space-y-4">
+          <div class="w-12 h-12 rounded-xl bg-red-600/10 text-red-600 dark:text-red-400 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-transform">
+            🏠
           </div>
-          <h3 class="text-xl font-black text-slate-900 dark:text-white mb-2 font-display">Residential CCTV Systems</h3>
-          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
-            Hardwired 4K PoE security cameras designed specifically for homes. Hidden cabling through roof cavities, ultra-sharp color night vision, and instant mobile alerts.
-          </p>
+          <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">{card1Title}</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{card1Desc}</p>
         </div>
-        <ul class="space-y-2 text-xs font-semibold text-slate-700 dark:text-slate-300 pt-4 border-t border-slate-100 dark:border-slate-800">
-          <li class="flex items-center gap-2"><span class="text-red-600">✓</span> Perimeter & driveway coverage</li>
-          <li class="flex items-center gap-2"><span class="text-red-600">✓</span> Two-way audio & siren alarms</li>
-          <li class="flex items-center gap-2"><span class="text-red-600">✓</span> No monthly subscriptions</li>
-        </ul>
       </div>
 
-      <!-- Card 2: Commercial & Office -->
-      <div class="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-red-500/50 transition-all flex flex-col justify-between group">
-        <div>
-          <div class="flex items-center justify-between mb-5">
-            <div class="w-12 h-12 rounded-2xl bg-red-50 dark:bg-red-950/60 text-red-600 dark:text-red-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-            </div>
-            <span class="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/50">
-              Commercial
-            </span>
+      <!-- Card 2 -->
+      <div class="glass-box rounded-2xl p-7 flex flex-col justify-between group">
+        <div class="space-y-4">
+          <div class="w-12 h-12 rounded-xl bg-blue-600/10 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-transform">
+            🏢
           </div>
-          <h3 class="text-xl font-black text-slate-900 dark:text-white mb-2 font-display">Commercial CCTV & Loss Prevention</h3>
-          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
-            Multi-camera enterprise configurations for offices, retail, hospitality, and warehouses. High frame rate POS register monitoring and licence plate capture.
-          </p>
+          <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">{card2Title}</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{card2Desc}</p>
         </div>
-        <ul class="space-y-2 text-xs font-semibold text-slate-700 dark:text-slate-300 pt-4 border-t border-slate-100 dark:border-slate-800">
-          <li class="flex items-center gap-2"><span class="text-red-600">✓</span> Cash register & POS zooming</li>
-          <li class="flex items-center gap-2"><span class="text-red-600">✓</span> High-capacity multi-terabyte NVRs</li>
-          <li class="flex items-center gap-2"><span class="text-red-600">✓</span> Multi-user management roles</li>
-        </ul>
       </div>
 
-      <!-- Card 3: Network Security & Firewalls -->
-      <div class="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-red-500/50 transition-all flex flex-col justify-between group">
-        <div>
-          <div class="flex items-center justify-between mb-5">
-            <div class="w-12 h-12 rounded-2xl bg-red-50 dark:bg-red-950/60 text-red-600 dark:text-red-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-            </div>
-            <span class="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-purple-50 dark:bg-purple-950 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800/50">
-              IT Infrastructure
-            </span>
+      <!-- Card 3 -->
+      <div class="glass-box rounded-2xl p-7 flex flex-col justify-between group">
+        <div class="space-y-4">
+          <div class="w-12 h-12 rounded-xl bg-purple-600/10 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-transform">
+            🛡️
           </div>
-          <h3 class="text-xl font-black text-slate-900 dark:text-white mb-2 font-display">Firewalls & Subnet Isolation</h3>
-          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
-            True computer and network protection. We isolate your IoT surveillance cameras onto a dedicated VLAN, preventing security cameras from exposing your internal PCs.
-          </p>
+          <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">{card3Title}</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{card3Desc}</p>
         </div>
-        <ul class="space-y-2 text-xs font-semibold text-slate-700 dark:text-slate-300 pt-4 border-t border-slate-100 dark:border-slate-800">
-          <li class="flex items-center gap-2"><span class="text-red-600">✓</span> Hardware firewalls & VLAN isolation</li>
-          <li class="flex items-center gap-2"><span class="text-red-600">✓</span> Ransomware & intrusion mitigation</li>
-          <li class="flex items-center gap-2"><span class="text-red-600">✓</span> Enterprise WiFi & VPN gateways</li>
-        </ul>
       </div>
 
-      <!-- Card 4: Data Cabling Cat6 -->
-      <div class="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-red-500/50 transition-all flex flex-col justify-between group">
-        <div>
-          <div class="flex items-center justify-between mb-5">
-            <div class="w-12 h-12 rounded-2xl bg-red-50 dark:bg-red-950/60 text-red-600 dark:text-red-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-            </div>
-            <span class="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50">
-              ACMA Cabler
-            </span>
+      <!-- Card 4 -->
+      <div class="glass-box rounded-2xl p-7 flex flex-col justify-between group">
+        <div class="space-y-4">
+          <div class="w-12 h-12 rounded-xl bg-emerald-600/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-transform">
+            🔌
           </div>
-          <h3 class="text-xl font-black text-slate-900 dark:text-white mb-2 font-display">Structured Cat6 Data Cabling</h3>
-          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
-            Solid copper data cabling installations, patch panel terminations, server racks, and high-speed gigabit drops for home offices, gaming, and access points.
-          </p>
+          <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">{card4Title}</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{card4Desc}</p>
         </div>
-        <ul class="space-y-2 text-xs font-semibold text-slate-700 dark:text-slate-300 pt-4 border-t border-slate-100 dark:border-slate-800">
-          <li class="flex items-center gap-2"><span class="text-red-600">✓</span> Fluke certified testing</li>
-          <li class="flex items-center gap-2"><span class="text-red-600">✓</span> Server rack dressing & cleanups</li>
-          <li class="flex items-center gap-2"><span class="text-red-600">✓</span> 50% cheaper than 240V electricians</li>
-        </ul>
       </div>
 
-      <!-- Card 5: AI Deterrence & Smart Motion -->
-      <div class="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-red-500/50 transition-all flex flex-col justify-between group">
-        <div>
-          <div class="flex items-center justify-between mb-5">
-            <div class="w-12 h-12 rounded-2xl bg-red-50 dark:bg-red-950/60 text-red-600 dark:text-red-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-            </div>
-            <span class="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-red-50 dark:bg-red-950 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800/50">
-              Proactive AI
-            </span>
+      <!-- Card 5 -->
+      <div class="glass-box rounded-2xl p-7 flex flex-col justify-between group">
+        <div class="space-y-4">
+          <div class="w-12 h-12 rounded-xl bg-red-600/10 text-red-600 dark:text-red-400 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-transform">
+            🚨
           </div>
-          <h3 class="text-xl font-black text-slate-900 dark:text-white mb-2 font-display">Active Deterrence AI Turrets</h3>
-          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
-            Dahua TiOC and Hikvision AcuSense technology. Smart deep-learning algorithms filter out leaves, rain, and pets, only triggering on genuine human and vehicle intruders.
-          </p>
+          <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">{card5Title}</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{card5Desc}</p>
         </div>
-        <ul class="space-y-2 text-xs font-semibold text-slate-700 dark:text-slate-300 pt-4 border-t border-slate-100 dark:border-slate-800">
-          <li class="flex items-center gap-2"><span class="text-red-600">✓</span> 99% false alarm reduction</li>
-          <li class="flex items-center gap-2"><span class="text-red-600">✓</span> Police strobe visual deterrence</li>
-          <li class="flex items-center gap-2"><span class="text-red-600">✓</span> Custom voice warnings</li>
-        </ul>
       </div>
 
-      <!-- Card 6: System Repairs & Upgrades -->
-      <div class="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-red-500/50 transition-all flex flex-col justify-between group">
-        <div>
-          <div class="flex items-center justify-between mb-5">
-            <div class="w-12 h-12 rounded-2xl bg-red-50 dark:bg-red-950/60 text-red-600 dark:text-red-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-            </div>
-            <span class="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/10">
-              Diagnostics
-            </span>
+      <!-- Card 6 -->
+      <div class="glass-box rounded-2xl p-7 flex flex-col justify-between group">
+        <div class="space-y-4">
+          <div class="w-12 h-12 rounded-xl bg-amber-600/10 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-transform">
+            🔧
           </div>
-          <h3 class="text-xl font-black text-slate-900 dark:text-white mb-2 font-display">Repairs, Passwords & NVR Upgrades</h3>
-          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
-            Locked out of your recorder? Dead hard drives? Offline cameras? We reset forgotten admin passwords, replace failing PoE switches, and modernize outdated coaxial setups.
-          </p>
+          <h3 class="text-xl font-black text-slate-900 dark:text-white font-display">{card6Title}</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{card6Desc}</p>
         </div>
-        <ul class="space-y-2 text-xs font-semibold text-slate-700 dark:text-slate-300 pt-4 border-t border-slate-100 dark:border-slate-800">
-          <li class="flex items-center gap-2"><span class="text-red-600">✓</span> Dahua / Hikvision password resets</li>
-          <li class="flex items-center gap-2"><span class="text-red-600">✓</span> HDD replacement & bad sector recovery</li>
-          <li class="flex items-center gap-2"><span class="text-red-600">✓</span> Mobile app connection repairs</li>
-        </ul>
       </div>
 
     </div>
-
   </div>
 </section>

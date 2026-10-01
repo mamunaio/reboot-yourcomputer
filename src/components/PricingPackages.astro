@@ -1,245 +1,89 @@
 ---
-// Component: PricingPackages.astro
+import type { PricingSection } from '../lib/content-schema';
+import { BRISBANE_CCTV_FALLBACK } from '../data/cctv-brisbane-fallback';
+
+interface Props {
+  pricing?: PricingSection;
+}
+
+const { pricing = BRISBANE_CCTV_FALLBACK.pricing } = Astro.props;
+const badge = pricing?.badge || BRISBANE_CCTV_FALLBACK.pricing.badge;
+const heading = pricing?.heading || BRISBANE_CCTV_FALLBACK.pricing.heading;
+const intro = pricing?.intro || BRISBANE_CCTV_FALLBACK.pricing.intro;
+const tier1Name = pricing?.tier1Name || BRISBANE_CCTV_FALLBACK.pricing.tier1Name;
+const tier1Price = pricing?.tier1Price || BRISBANE_CCTV_FALLBACK.pricing.tier1Price;
+const tier1Desc = pricing?.tier1Desc || BRISBANE_CCTV_FALLBACK.pricing.tier1Desc;
+const tier2Name = pricing?.tier2Name || BRISBANE_CCTV_FALLBACK.pricing.tier2Name;
+const tier2Price = pricing?.tier2Price || BRISBANE_CCTV_FALLBACK.pricing.tier2Price;
+const tier2Badge = pricing?.tier2Badge || BRISBANE_CCTV_FALLBACK.pricing.tier2Badge;
+const tier2Desc = pricing?.tier2Desc || BRISBANE_CCTV_FALLBACK.pricing.tier2Desc;
+const tier3Name = pricing?.tier3Name || BRISBANE_CCTV_FALLBACK.pricing.tier3Name;
+const tier3Price = pricing?.tier3Price || BRISBANE_CCTV_FALLBACK.pricing.tier3Price;
+const tier3Badge = pricing?.tier3Badge || BRISBANE_CCTV_FALLBACK.pricing.tier3Badge;
+const tier3Desc = pricing?.tier3Desc || BRISBANE_CCTV_FALLBACK.pricing.tier3Desc;
 ---
-<!-- PRICING & PACKAGES -->
-<section id="pricing" class="py-20 bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200/80 dark:border-white/10">
+
+<section class="py-16 lg:py-24 bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200/80 dark:border-white/10" id="pricing">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    
-    <div class="text-center max-w-3xl mx-auto mb-14">
-      <span class="text-xs font-black text-red-600 dark:text-red-400 uppercase tracking-widest px-3.5 py-1 rounded-full bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800/50 shadow-2xs">
-        Transparent Upfront Rates
-      </span>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white mt-3 tracking-tight font-display">
-        Fixed-Price CCTV Installation Packages
+
+    <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/60 text-emerald-700 dark:text-emerald-300">
+        <span>💰</span>
+        <span>{badge}</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white font-display">
+        {heading}
       </h2>
-      <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-2 leading-relaxed">
-        Commercial-grade Dahua and Hikvision hardware with 100% pure copper Cat6 cabling and no monthly cloud fees.
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400">
+        {intro}
       </p>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-      
-      <!-- Package 1: BYO Installation -->
-      <div class="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
+
+      <!-- Tier 1: BYO -->
+      <div class="glass-box rounded-2xl p-8 flex flex-col justify-between space-y-6">
         <div class="space-y-4">
-          <span class="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider inline-block">
-            Customer Supplied Cameras
-          </span>
-          <h3 class="text-2xl font-black text-slate-900 dark:text-white font-display">BYO Installation</h3>
-          <div class="flex items-baseline gap-1">
-            <span class="text-4xl font-black text-slate-900 dark:text-white font-display">From $490</span>
-            <span class="text-xs text-slate-500 font-bold">inc. GST</span>
-          </div>
-          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-            Professional mounting and structured cabling for systems you've purchased yourself from Swann, Reolink, Eufy, or Costco.
-          </p>
-
-          <div class="border-t border-slate-200 dark:border-white/10 pt-4 space-y-2.5 text-sm text-slate-600 dark:text-slate-300">
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span>1–4 Camera Mounting Allowance</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span>Single-Storey Roof Space Assumed</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span>Heavy-Duty Cat6 Cabling &amp; RJ45 Crimps</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span>NVR Recorder Setup &amp; Network Connection</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span>Smartphone App Configuration &amp; Testing</span>
-            </div>
-          </div>
+          <div class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Custom Option</div>
+          <h3 class="text-2xl font-black text-slate-900 dark:text-white font-display">{tier1Name}</h3>
+          <div class="text-3xl font-black text-slate-900 dark:text-white">{tier1Price}</div>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{tier1Desc}</p>
         </div>
-
-        <div class="pt-6">
-          <a 
-            href="#quote" 
-            onclick="prefillQuote('BYO Installation Package (From $490)', 'Home / Residential')" 
-            class="w-full py-3.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-black text-xs uppercase tracking-wider transition-all inline-flex items-center justify-center text-center shadow-xs cursor-pointer"
-          >
-            Book BYO Installation &rarr;
-          </a>
-        </div>
+        <a href="#quote" class="w-full py-3.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-bold text-xs uppercase tracking-wider text-center transition-colors">
+          Get BYO Quote
+        </a>
       </div>
 
-      <!-- Package 2: Essential Turnkey 4K PoE (FEATURED) -->
-      <div class="p-8 rounded-3xl bg-white dark:bg-slate-900 border-2 border-red-600 shadow-2xl relative flex flex-col justify-between scale-105 z-10">
-        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-red-600 text-white text-[10px] font-black uppercase tracking-wider shadow-md whitespace-nowrap">
-          Most Popular for Brisbane Homes
+      <!-- Tier 2: 4-Camera 4K PoE (Most Popular) -->
+      <div class="rounded-3xl p-8 bg-white dark:bg-slate-800 border-2 border-red-600 shadow-xl flex flex-col justify-between space-y-6 relative transform lg:-translate-y-2">
+        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-red-600 text-white font-black text-[10px] uppercase tracking-wider shadow-md">
+          {tier2Badge}
         </div>
-
         <div class="space-y-4">
-          <span class="px-3 py-1 rounded-full bg-red-50 dark:bg-red-950/60 text-red-600 dark:text-red-400 text-xs font-bold uppercase tracking-wider inline-block">
-            Complete Turnkey 4K Solution
-          </span>
-          <h3 class="text-2xl font-black text-slate-900 dark:text-white font-display">4-Camera 4K PoE System</h3>
-          <div class="flex items-baseline gap-1">
-            <span class="text-4xl font-black text-red-600 font-display">From $1,690</span>
-            <span class="text-xs text-slate-500 font-bold">inc. GST</span>
-          </div>
-          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-            Commercial-grade Dahua or Hikvision system with high-definition 4K sensors, continuous recording, and zero monthly subscription fees.
-          </p>
-
-          <div class="border-t border-slate-200 dark:border-white/10 pt-4 space-y-2.5 text-sm text-slate-700 dark:text-slate-200 font-medium">
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span><strong>4 x 4K Ultra HD</strong> Weatherproof Turret Cameras</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span><strong>4-Channel 4K NVR</strong> with Built-in PoE Switch</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span><strong>2TB WD Purple</strong> Surveillance Hard Drive</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span>Full-Color ColorVu 30m Smart Night Vision</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span>Concealed In-Roof Solid Copper Cat6 Cabling</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span>Mobile Remote Viewing on All Phones/iPads</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span>3-Yr Equipment + 5-Yr Workmanship Warranty</span>
-            </div>
-          </div>
+          <div class="text-xs font-bold uppercase tracking-wider text-red-600 dark:text-red-400">Turnkey Complete</div>
+          <h3 class="text-2xl font-black text-slate-900 dark:text-white font-display">{tier2Name}</h3>
+          <div class="text-4xl font-black text-red-600 dark:text-red-500">{tier2Price}</div>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{tier2Desc}</p>
         </div>
-
-        <div class="pt-6">
-          <a 
-            href="#quote" 
-            onclick="prefillQuote('Essential Turnkey 4K PoE Package (From $1,690)', 'Home / Residential')" 
-            class="w-full py-4 rounded-xl bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-600 text-white font-black text-xs uppercase tracking-wider shadow-lg shadow-red-600/30 transition-all inline-flex items-center justify-center text-center cursor-pointer transform hover:-translate-y-0.5"
-          >
-            Request 4K Turnkey Quote &rarr;
-          </a>
-        </div>
+        <a href="#quote" class="w-full py-4 rounded-xl bg-gradient-to-r from-red-600 to-red-500 text-white font-black text-xs uppercase tracking-wider text-center shadow-lg shadow-red-600/25 hover:shadow-xl transition-all">
+          Order 4-Camera System
+        </a>
       </div>
 
-      <!-- Package 3: Active Deterrence -->
-      <div class="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
+      <!-- Tier 3: Active Deterrence Pro -->
+      <div class="glass-box rounded-2xl p-8 flex flex-col justify-between space-y-6">
         <div class="space-y-4">
-          <span class="px-3 py-1 rounded-full bg-red-50 dark:bg-red-950/60 text-red-600 dark:text-red-400 text-xs font-bold uppercase tracking-wider inline-block">
-            Proactive Defense &amp; AI
-          </span>
-          <h3 class="text-2xl font-black text-slate-900 dark:text-white font-display">Active Deterrence Pro</h3>
-          <div class="flex items-baseline gap-1">
-            <span class="text-4xl font-black text-slate-900 dark:text-white font-display">From $1,890</span>
-            <span class="text-xs text-slate-500 font-bold">inc. GST</span>
-          </div>
-          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-            Equipped with autonomous red/blue police strobes, 110dB sirens, and two-way voice talkdown to scare off intruders before a break-in occurs.
-          </p>
-
-          <div class="border-t border-slate-200 dark:border-white/10 pt-4 space-y-2.5 text-sm text-slate-600 dark:text-slate-300">
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span><strong>4 x TiOC 4K</strong> Active Deterrence Cameras</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span>Flashing Red &amp; Blue Police Warning Strobes</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span>Built-in 110dB Siren &amp; Custom Voice Warnings</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span>2TB Hard Drive + 4-Channel 4K PoE NVR</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span>Scheduled Arming (e.g. active 10 PM – 6 AM)</span>
-            </div>
-          </div>
+          <div class="text-xs font-bold uppercase tracking-wider text-purple-600 dark:text-purple-400">{tier3Badge}</div>
+          <h3 class="text-2xl font-black text-slate-900 dark:text-white font-display">{tier3Name}</h3>
+          <div class="text-3xl font-black text-slate-900 dark:text-white">{tier3Price}</div>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{tier3Desc}</p>
         </div>
-
-        <div class="pt-6">
-          <a 
-            href="#quote" 
-            onclick="prefillQuote('Active Deterrence Pro Package (From $1,890)', 'Home / Residential')" 
-            class="w-full py-3.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-red-600 hover:text-white text-slate-900 dark:text-white font-black text-xs uppercase tracking-wider transition-all inline-flex items-center justify-center text-center shadow-xs cursor-pointer"
-          >
-            Quote Active Deterrence &rarr;
-          </a>
-        </div>
+        <a href="#quote" class="w-full py-3.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 font-bold text-xs uppercase tracking-wider text-center transition-colors">
+          Order Active Pro
+        </a>
       </div>
 
     </div>
 
   </div>
 </section>
-
-<script is:inline>
-  function prefillQuote(packageTitle, propertyType) {
-    // 1. Scroll to Quote section
-    const quoteSection = document.getElementById('quote');
-    if (quoteSection) {
-      quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    // 2. Select appropriate service dropdown
-    const serviceSelect = document.getElementById('form-service');
-    if (serviceSelect) {
-      const lower = packageTitle.toLowerCase();
-      if (lower.includes('byo')) {
-        serviceSelect.value = 'BYO Camera Installation';
-      } else if (lower.includes('active deterrence')) {
-        serviceSelect.value = 'Active Deterrence CCTV';
-      } else {
-        serviceSelect.value = 'New Complete CCTV System';
-      }
-    }
-
-    // 3. Select property type
-    const propertySelect = document.getElementById('form-property');
-    if (propertySelect && propertyType) {
-      propertySelect.value = propertyType;
-    }
-
-    // 4. Select camera count
-    const cameraSelect = document.getElementById('form-cameras');
-    if (cameraSelect) {
-      if (packageTitle.toLowerCase().includes('4-camera') || packageTitle.toLowerCase().includes('turnkey')) {
-        cameraSelect.value = '4 Cameras (Standard Home)';
-      }
-    }
-
-    // 5. Pre-fill project notes
-    const notesInput = document.getElementById('form-notes');
-    if (notesInput) {
-      notesInput.value = 'Interested in: ' + packageTitle;
-    }
-
-    // 6. Highlight and focus
-    setTimeout(() => {
-      const nameInput = document.getElementById('form-name');
-      if (nameInput) {
-        nameInput.focus();
-      }
-      const quoteBox = quoteSection ? quoteSection.querySelector('.glass-box') : null;
-      if (quoteBox) {
-        quoteBox.classList.add('ring-4', 'ring-red-500/40');
-        setTimeout(() => {
-          quoteBox.classList.remove('ring-4', 'ring-red-500/40');
-        }, 1500);
-      }
-    }, 450);
-  }
-</script>
