@@ -1,4 +1,11 @@
+# Resend Email Dispatch
 RESEND_API_KEY=mock
 NOTIFICATION_EMAIL_TO=your-email@example.com
 NOTIFICATION_EMAIL_FROM=Reboot Your Computer <your-verified-sender@example.com>
+
+# Cloudflare Turnstile (Optional)
 TURNSTILE_SECRET_KEY=your-turnstile-secret
+
+# Google Sheets Lead Logging (Optional Google Apps Script Web App endpoint)
+GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/your-script-id/exec
+GOOGLE_SHEETS_SECRET=your-google-sheets-secret

@@ -3,6 +3,8 @@ interface Env {
   NOTIFICATION_EMAIL_TO?: string;
   NOTIFICATION_EMAIL_FROM?: string;
   TURNSTILE_SECRET_KEY?: string;
+  GOOGLE_SHEETS_WEBHOOK_URL?: string;
+  GOOGLE_SHEETS_SECRET?: string;
 }
 
 const ALLOWED_ORIGINS = [
@@ -39,6 +41,92 @@ function escapeHtml(str: unknown): string {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+function sanitizeSheetValue(val: unknown): string {
+  if (val == null) return "";
+  const str = String(val).trim();
+  if (!str) return "";
+  if (str.startsWith("=") || str.startsWith("+") || str.startsWith("-") || str.startsWith("@")) {
+    return "'" + str;
+  }
+  return str;
+}
+
+async function logToGoogleSheets(
+  env: Env,
+  payload: Partial<EnquiryPayload>,
+  fields: {
+    name: string;
+    phone: string;
+    email: string;
+    suburb: string;
+    propertyType: string;
+    serviceType: string;
+    cameraCount: string;
+    buildingStoreys: string;
+    message: string;
+  }
+): Promise<void> {
+  const webhookUrl = env.GOOGLE_SHEETS_WEBHOOK_URL?.trim();
+  const secret = env.GOOGLE_SHEETS_SECRET?.trim();
+
+  if (!webhookUrl || !secret) {
+    return;
+  }
+
+  const timestamp = new Date().toISOString();
+  const formType = payload.formType || "contact";
+
+  const row = [
+    timestamp,
+    formType,
+    sanitizeSheetValue(fields.name),
+    sanitizeSheetValue(fields.phone),
+    sanitizeSheetValue(fields.email),
+    sanitizeSheetValue(fields.suburb),
+    sanitizeSheetValue(fields.serviceType),
+    sanitizeSheetValue(fields.propertyType),
+    sanitizeSheetValue(fields.cameraCount),
+    sanitizeSheetValue(fields.buildingStoreys),
+    sanitizeSheetValue(fields.message),
+  ];
+
+  const bodyData = {
+    timestamp,
+    formType,
+    name: sanitizeSheetValue(fields.name),
+    phone: sanitizeSheetValue(fields.phone),
+    email: sanitizeSheetValue(fields.email),
+    suburb: sanitizeSheetValue(fields.suburb),
+    serviceType: sanitizeSheetValue(fields.serviceType),
+    propertyType: sanitizeSheetValue(fields.propertyType),
+    cameraCount: sanitizeSheetValue(fields.cameraCount),
+    buildingStoreys: sanitizeSheetValue(fields.buildingStoreys),
+    message: sanitizeSheetValue(fields.message),
+    row,
+  };
+
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3000);
+
+    const res = await fetch(webhookUrl, {
+      method: "POST",
+      signal: controller.signal,
+      headers: {
+        "Content-Type": "application/json",
+        "X-Google-Sheets-Secret": secret,
+      },
+      body: JSON.stringify(bodyData),
+    }).finally(() => clearTimeout(timeoutId));
+
+    if (!res.ok) {
+      console.error(`[GoogleSheets] Logging returned non-2xx status: ${res.status} for formType: ${formType}`);
+    }
+  } catch {
+    console.error(`[GoogleSheets] Failed to log lead for formType: ${formType}`);
+  }
 }
 
 function createJsonResponse(data: unknown, status: number, origin: string | null): Response {
@@ -98,15 +186,14 @@ export async function onRequestPost(context: { request: Request; env: Env }): Pr
     return createJsonResponse(
       {
         success: false,
-        error: "Validation failed",
-        fields: ["Content-Type"],
+        error: "Invalid content type",
       },
       400,
       origin
     );
   }
 
-  // 3. JSON Parsing
+  // 3. JSON parse
   let body: unknown;
   try {
     body = await request.json();
@@ -114,18 +201,18 @@ export async function onRequestPost(context: { request: Request; env: Env }): Pr
     return createJsonResponse(
       {
         success: false,
-        error: "Invalid JSON body",
+        error: "Invalid JSON",
       },
       400,
       origin
     );
   }
 
-  if (!body || typeof body !== "object" || Array.isArray(body)) {
+  if (typeof body !== "object" || body === null || Array.isArray(body)) {
     return createJsonResponse(
       {
         success: false,
-        error: "Invalid JSON body",
+        error: "Invalid request payload",
       },
       400,
       origin
@@ -146,31 +233,38 @@ export async function onRequestPost(context: { request: Request; env: Env }): Pr
     );
   }
 
-  // 5. Schema Validation
-  const fields: string[] = [];
-
-  // formType
+  // 5. Form type validation
   const allowedFormTypes = ["contact", "cctv-quote", "data-ethernet"];
   if (!payload.formType || typeof payload.formType !== "string" || !allowedFormTypes.includes(payload.formType)) {
-    fields.push("formType");
+    return createJsonResponse(
+      {
+        success: false,
+        error: "Invalid form type",
+      },
+      400,
+      origin
+    );
   }
 
-  // name
+  // Field validation
+  const fields: string[] = [];
+
+  // name (required)
   const name = typeof payload.name === "string" ? payload.name.trim() : "";
   if (!name || name.length > 100) {
     fields.push("name");
   }
 
-  // phone
+  // phone (optional, max 40 chars)
   const phone = typeof payload.phone === "string" ? payload.phone.trim() : "";
   if (phone && phone.length > 40) {
     fields.push("phone");
   }
 
-  // email
+  // email (optional, valid format, max 120 chars)
   const email = typeof payload.email === "string" ? payload.email.trim() : "";
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (email.length > 120 || !emailRegex.test(email)) {
       fields.push("email");
     }
@@ -279,6 +373,18 @@ export async function onRequestPost(context: { request: Request; env: Env }): Pr
 
   // Mock mode check
   if (!resendApiKey || resendApiKey === "mock") {
+    await logToGoogleSheets(env, payload, {
+      name,
+      phone,
+      email,
+      suburb,
+      propertyType,
+      serviceType,
+      cameraCount,
+      buildingStoreys,
+      message,
+    });
+
     return createJsonResponse(
       {
         success: true,
@@ -371,6 +477,19 @@ export async function onRequestPost(context: { request: Request; env: Env }): Pr
         origin
       );
     }
+
+    // Attempt Google Sheets lead logging after email success
+    await logToGoogleSheets(env, payload, {
+      name,
+      phone,
+      email,
+      suburb,
+      propertyType,
+      serviceType,
+      cameraCount,
+      buildingStoreys,
+      message,
+    });
 
     return createJsonResponse(
       {
