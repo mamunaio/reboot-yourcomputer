@@ -1,4 +1,5 @@
 ---
+// Component: Inclusions.astro
 import type { InclusionsSection } from '../lib/content-schema';
 import { BRISBANE_CCTV_FALLBACK } from '../data/cctv-brisbane-fallback';
 
@@ -7,78 +8,149 @@ interface Props {
 }
 
 const { inclusions = BRISBANE_CCTV_FALLBACK.inclusions } = Astro.props;
-const badge = inclusions?.badge || BRISBANE_CCTV_FALLBACK.inclusions.badge;
-const heading = inclusions?.heading || BRISBANE_CCTV_FALLBACK.inclusions.heading;
-const subheading = inclusions?.subheading || BRISBANE_CCTV_FALLBACK.inclusions.subheading;
-const inc1Title = inclusions?.inc1Title || BRISBANE_CCTV_FALLBACK.inclusions.inc1Title;
-const inc1Desc = inclusions?.inc1Desc || BRISBANE_CCTV_FALLBACK.inclusions.inc1Desc;
-const inc2Title = inclusions?.inc2Title || BRISBANE_CCTV_FALLBACK.inclusions.inc2Title;
-const inc2Desc = inclusions?.inc2Desc || BRISBANE_CCTV_FALLBACK.inclusions.inc2Desc;
-const inc3Title = inclusions?.inc3Title || BRISBANE_CCTV_FALLBACK.inclusions.inc3Title;
-const inc3Desc = inclusions?.inc3Desc || BRISBANE_CCTV_FALLBACK.inclusions.inc3Desc;
-const inc4Title = inclusions?.inc4Title || BRISBANE_CCTV_FALLBACK.inclusions.inc4Title;
-const inc4Desc = inclusions?.inc4Desc || BRISBANE_CCTV_FALLBACK.inclusions.inc4Desc;
-const inc5Title = inclusions?.inc5Title || BRISBANE_CCTV_FALLBACK.inclusions.inc5Title;
-const inc5Desc = inclusions?.inc5Desc || BRISBANE_CCTV_FALLBACK.inclusions.inc5Desc;
-const inc6Title = inclusions?.inc6Title || BRISBANE_CCTV_FALLBACK.inclusions.inc6Title;
-const inc6Desc = inclusions?.inc6Desc || BRISBANE_CCTV_FALLBACK.inclusions.inc6Desc;
+
+const heading = inclusions?.heading || 'What Is Included in Every Installation?';
+const subheading = inclusions?.subheading || 'We provide complete turnkey installations. Everything needed for a clean, professional, long-lasting security setup is included upfront.';
 ---
 
-<section class="py-16 lg:py-24 bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200/80 dark:border-white/10" id="inclusions">
+<!-- INCLUSIONS AND PROOF -->
+<section class="py-20 bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200/80 dark:border-white/10" id="inclusions">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
 
-    <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-700 dark:text-red-300">
-        <span>✅</span>
-        <span>{badge}</span>
+      <!-- Checklist Side -->
+      <div class="lg:col-span-6 space-y-6">
+        <span class="text-xs font-black text-emerald-700 dark:text-emerald-400 uppercase tracking-widest px-3.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800/50 shadow-2xs">
+          Turnkey Standards
+        </span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight font-display">
+          {heading}
+        </h2>
+        <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+          Every installation from Reboot Security is a complete turnkey package. We do not leave until every camera is calibrated, cabling is concealed, and the app is running on your phone.
+        </p>
+
+        <ul class="space-y-3.5 pt-2">
+          <li class="flex items-start gap-3 text-slate-700 dark:text-slate-200 text-sm sm:text-base">
+            <div class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</div>
+            <span><strong>Comprehensive On-Site Assessment:</strong> Optimizing height, illumination angles, blind spots, and roof entry routes.</span>
+          </li>
+          <li class="flex items-start gap-3 text-slate-700 dark:text-slate-200 text-sm sm:text-base">
+            <div class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</div>
+            <span><strong>Fixed Written Scope &amp; Itemized Quote:</strong> Transparent pricing with zero hidden travel charges or surprise fees.</span>
+          </li>
+          <li class="flex items-start gap-3 text-slate-700 dark:text-slate-200 text-sm sm:text-base">
+            <div class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</div>
+            <span><strong>100% Concealed In-Roof Cabling:</strong> UV-rated solid copper Cat6 cabling routed through wall cavities without messy conduits.</span>
+          </li>
+          <li class="flex items-start gap-3 text-slate-700 dark:text-slate-200 text-sm sm:text-base">
+            <div class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</div>
+            <span><strong>Enterprise NVR &amp; WD Purple Hard Drive:</strong> Continuous 24/7 surveillance recording with 30–60 days of rolling local video history.</span>
+          </li>
+          <li class="flex items-start gap-3 text-slate-700 dark:text-slate-200 text-sm sm:text-base">
+            <div class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</div>
+            <span><strong>Full Smartphone App Setup &amp; Training:</strong> Installed and tested on all family or staff phones, with guidance on downloading clips.</span>
+          </li>
+          <li class="flex items-start gap-3 text-slate-700 dark:text-slate-200 text-sm sm:text-base">
+            <div class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</div>
+            <span><strong>Dual Warranties:</strong> 3-Year equipment replacement + written 5-Year cabling and workmanship guarantee.</span>
+          </li>
+        </ul>
       </div>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white font-display">
-        {heading}
-      </h2>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400">
-        {subheading}
-      </p>
+
+      <!-- Proof Side: Fixed Image Paths with Leading Slash -->
+      <div class="lg:col-span-6">
+        <div class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-800 border border-slate-200/90 dark:border-white/15 shadow-xl space-y-5">
+          <div class="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-3">
+            <div>
+              <span class="font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 block">Workmanship Proof</span>
+              <span class="text-base sm:text-lg font-black text-slate-900 dark:text-white font-display">Brisbane Security Architecture</span>
+            </div>
+
+            <!-- Tab buttons -->
+            <div class="inline-flex p-1 bg-slate-100 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-white/10 text-xs">
+              <button type="button" onclick="setProofTab('blueprint')" id="tab-btn-blueprint" class="px-3 py-1.5 rounded-lg font-bold bg-red-600 text-white shadow-xs transition-all cursor-pointer">
+                Camera Mount
+              </button>
+              <button type="button" onclick="setProofTab('rack')" id="tab-btn-rack" class="px-3 py-1.5 rounded-lg font-bold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+                Tidy Cabling
+              </button>
+            </div>
+          </div>
+
+          <!-- Visual Display Container -->
+          <div class="rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 shadow-xl relative aspect-[4/3]">
+            <!-- Blueprint / Camera Image with guaranteed leading slash -->
+            <div id="proof-view-blueprint" class="w-full h-full relative">
+              <img
+                src="/image8.png"
+                alt="Dahua PTZ security camera mounted on wall bracket with concealed weatherproof cabling"
+                class="w-full h-full object-cover object-[center_28%]"
+                loading="lazy"
+              />
+              <div class="absolute bottom-2 left-2 right-2 bg-slate-950/85 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/15 flex items-center justify-between text-[11px] font-mono text-cyan-300">
+                <span>// HEAVY-DUTY FIELD MOUNT</span>
+                <span class="text-amber-400 font-bold">WEATHERPROOF SEALED</span>
+              </div>
+            </div>
+
+            <!-- Tidy Cabling Rack Image with guaranteed leading slash -->
+            <div id="proof-view-rack" class="w-full h-full relative hidden">
+              <img
+                src="/cctv-tidy-rack.jpg"
+                alt="Professional tidy NVR data rack installation with zero messy cabling"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div class="absolute bottom-2 left-2 right-2 bg-slate-950/85 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/15 flex items-center justify-between text-[11px] font-mono text-emerald-300">
+                <span>// WALL-MOUNT NVR RACK TERMINATION</span>
+                <span class="text-emerald-400 font-bold">ZERO MESSY WIRES</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tidy Cabling Guarantee Box -->
+          <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-white/10 flex items-center gap-3.5 text-sm">
+            <span class="text-2xl">⚡</span>
+            <div>
+              <strong class="text-slate-900 dark:text-white block font-display">Concealed Cabling Guarantee:</strong>
+              <p class="text-slate-600 dark:text-slate-400 mt-0.5 text-xs sm:text-sm leading-relaxed">
+                Zero messy conduits across your front facade. We terminate directly through roof cavities into a tidy entertainment cabinet or a wall-mounted lockable rack.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-      <div class="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 shadow-sm space-y-3">
-        <div class="text-2xl">📦</div>
-        <h3 class="text-lg font-black text-slate-900 dark:text-white font-display">{inc1Title}</h3>
-        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{inc1Desc}</p>
-      </div>
-
-      <div class="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 shadow-sm space-y-3">
-        <div class="text-2xl">🛡️</div>
-        <h3 class="text-lg font-black text-slate-900 dark:text-white font-display">{inc2Title}</h3>
-        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{inc2Desc}</p>
-      </div>
-
-      <div class="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 shadow-sm space-y-3">
-        <div class="text-2xl">🏠</div>
-        <h3 class="text-lg font-black text-slate-900 dark:text-white font-display">{inc3Title}</h3>
-        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{inc3Desc}</p>
-      </div>
-
-      <div class="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 shadow-sm space-y-3">
-        <div class="text-2xl">💾</div>
-        <h3 class="text-lg font-black text-slate-900 dark:text-white font-display">{inc4Title}</h3>
-        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{inc4Desc}</p>
-      </div>
-
-      <div class="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 shadow-sm space-y-3">
-        <div class="text-2xl">📱</div>
-        <h3 class="text-lg font-black text-slate-900 dark:text-white font-display">{inc5Title}</h3>
-        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{inc5Desc}</p>
-      </div>
-
-      <div class="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 shadow-sm space-y-3">
-        <div class="text-2xl">⭐</div>
-        <h3 class="text-lg font-black text-slate-900 dark:text-white font-display">{inc6Title}</h3>
-        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{inc6Desc}</p>
-      </div>
-
-    </div>
-
   </div>
 </section>
+
+<script is:inline>
+  function setProofTab(mode) {
+    const viewBlueprint = document.getElementById('proof-view-blueprint');
+    const viewRack = document.getElementById('proof-view-rack');
+    const btnBlueprint = document.getElementById('tab-btn-blueprint');
+    const btnRack = document.getElementById('tab-btn-rack');
+
+    if (mode === 'rack') {
+      if (viewBlueprint) viewBlueprint.classList.add('hidden');
+      if (viewRack) viewRack.classList.remove('hidden');
+      if (btnRack) {
+        btnRack.className = 'px-3 py-1.5 rounded-lg font-bold bg-red-600 text-white shadow-xs transition-all cursor-pointer';
+      }
+      if (btnBlueprint) {
+        btnBlueprint.className = 'px-3 py-1.5 rounded-lg font-bold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer';
+      }
+    } else {
+      if (viewRack) viewRack.classList.add('hidden');
+      if (viewBlueprint) viewBlueprint.classList.remove('hidden');
+      if (btnBlueprint) {
+        btnBlueprint.className = 'px-3 py-1.5 rounded-lg font-bold bg-red-600 text-white shadow-xs transition-all cursor-pointer';
+      }
+      if (btnRack) {
+        btnRack.className = 'px-3 py-1.5 rounded-lg font-bold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer';
+      }
+    }
+  }
+</script>

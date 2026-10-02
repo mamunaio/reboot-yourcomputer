@@ -1,4 +1,5 @@
 ---
+// Component: InstallerProfile.astro
 import { business } from '../config/business';
 import type { InstallerSection, SiteSection } from '../lib/content-schema';
 import { BRISBANE_CCTV_FALLBACK } from '../data/cctv-brisbane-fallback';
@@ -15,89 +16,112 @@ const {
 
 const phone = site?.phone || business.phone;
 const phoneHref = site?.phoneHref || business.phoneHref;
-const badge = installer?.badge || BRISBANE_CCTV_FALLBACK.installer.badge;
-const heading = installer?.heading || BRISBANE_CCTV_FALLBACK.installer.heading;
-const name = installer?.name || BRISBANE_CCTV_FALLBACK.installer.name;
-const role = installer?.role || BRISBANE_CCTV_FALLBACK.installer.role;
-const bio = installer?.bio || BRISBANE_CCTV_FALLBACK.installer.bio;
-const credential1 = installer?.credential1 || BRISBANE_CCTV_FALLBACK.installer.credential1;
-const credential2 = installer?.credential2 || BRISBANE_CCTV_FALLBACK.installer.credential2;
-const credential3 = installer?.credential3 || BRISBANE_CCTV_FALLBACK.installer.credential3;
-const credential4 = installer?.credential4 || BRISBANE_CCTV_FALLBACK.installer.credential4;
-const imageUrl = installer?.imageUrl || BRISBANE_CCTV_FALLBACK.installer.imageUrl;
+
+const badge = installer?.badge || 'Local Trade Integrity';
+const heading = installer?.heading || 'Meet Your Licensed Lead Installer';
+const name = installer?.name || 'Richard';
+const role = installer?.role || 'Master Cabler & Security Specialist';
+const bio = installer?.bio || 'When you book with Reboot Security, you work directly with me from the first on-site assessment to the final smartphone app walkthrough. No sales reps making unrealistic promises, and no rushed contract installers cutting corners behind your walls.';
+const imageUrl = installer?.imageUrl || '/Richard.png';
 ---
 
-<section class="py-16 lg:py-24 bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-white/10" id="installer">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <div class="glass-box rounded-3xl p-8 lg:p-12 overflow-hidden relative">
+<section id="installer-profile" class="py-20 relative overflow-hidden bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200/80 dark:border-white/10 scroll-mt-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <span class="text-xs font-black text-red-600 dark:text-red-400 uppercase tracking-widest px-3.5 py-1 rounded-full bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800/50 shadow-2xs">
+        {badge}
+      </span>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white mt-3 tracking-tight font-display">
+        {heading}
+      </h2>
+      <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-2 leading-relaxed">
+        Personal, accountable security installations by an experienced Brisbane local &ndash; never outsourced to rushed third-party contractors.
+      </p>
+    </div>
 
-        <!-- Portrait -->
-        <div class="lg:col-span-4 flex justify-center">
-          <div class="relative w-56 h-56 sm:w-64 sm:h-64 rounded-3xl overflow-hidden p-2 bg-gradient-to-br from-red-600 to-amber-500 shadow-xl">
+    <!-- Main Profile Card -->
+    <div class="rounded-3xl p-6 sm:p-10 lg:p-12 bg-white dark:bg-slate-800 border border-slate-200/90 dark:border-white/15 shadow-xl">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+
+        <!-- Left Column: Portrait -->
+        <div class="lg:col-span-5">
+          <div class="relative rounded-2xl overflow-hidden border-2 border-slate-200 dark:border-slate-700 bg-gradient-to-t from-slate-100 to-slate-200 dark:from-slate-900 dark:to-slate-800 shadow-lg aspect-[4/4.5] flex items-end justify-center">
+
             <img
               src={imageUrl}
-              alt="Richard - Licensed Lead Installer, ACMA Master Cabler"
-              class="w-full h-full object-cover rounded-2xl bg-slate-900"
+              alt="Richard - Lead Security Installer & ACMA Master Cabler"
+              class="w-full h-full object-contain object-bottom relative z-10"
               loading="lazy"
             />
+
+            <!-- Experience Tag -->
+            <div class="absolute top-3.5 left-3.5 z-20 px-3 py-1 rounded-full bg-slate-900/90 text-white text-[11px] font-bold shadow-md">
+              <span>⭐ 15+ Years Local Experience</span>
+            </div>
+
+            <!-- Cabler Tag -->
+            <div class="absolute bottom-3.5 right-3.5 z-20 px-3 py-1 rounded-full bg-red-600 text-white text-[10px] font-mono font-bold tracking-wider uppercase shadow-md">
+              ACMA Registered
+            </div>
           </div>
         </div>
 
-        <!-- Bio & Credentials -->
-        <div class="lg:col-span-8 space-y-5 text-center lg:text-left">
-
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-700 dark:text-red-300">
-            <span>🛡️</span>
-            <span>{badge}</span>
+        <!-- Right Column: Credentials & Experience -->
+        <div class="lg:col-span-7 space-y-6">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider mb-2">
+              <span>✓ ACMA Open Registration • Licensed QLD Security Firm</span>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight font-display">
+              {name} &ndash; {role}
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed mt-2">
+              {bio}
+            </p>
           </div>
 
-          <h2 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white font-display">
-            {heading}
-          </h2>
-
-          <h3 class="text-xl font-bold text-red-600 dark:text-red-400">
-            {name} &ndash; {role}
-          </h3>
-
-          <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl">
-            {bio}
-          </p>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300">
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-500 font-bold">✓</span>
-              <span>{credential1}</span>
+          <div class="space-y-3 pt-1 text-sm text-slate-700 dark:text-slate-200 font-medium">
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-red-100 dark:bg-red-900/40 text-red-600 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</div>
+              <div>
+                <strong class="text-slate-900 dark:text-white font-display">15+ Years Hands-On Brisbane Experience:</strong>
+                <span class="text-slate-600 dark:text-slate-300"> Extensive knowledge navigating Brisbane brick veneer, steep tile roofs, Colorbond trusses, and two-storey ceiling drops to conceal all cabling.</span>
+              </div>
             </div>
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-500 font-bold">✓</span>
-              <span>{credential2}</span>
+
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-red-100 dark:bg-red-900/40 text-red-600 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</div>
+              <div>
+                <strong class="text-slate-900 dark:text-white font-display">Licensed QLD Security Installer (Class 1 &amp; 2):</strong>
+                <span class="text-slate-600 dark:text-slate-300"> Government-vetted and Queensland Police fingerprinted with comprehensive criminal background checks for total household security.</span>
+              </div>
             </div>
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-500 font-bold">✓</span>
-              <span>{credential3}</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="text-emerald-500 font-bold">✓</span>
-              <span>{credential4}</span>
+
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-red-100 dark:bg-red-900/40 text-red-600 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</div>
+              <div>
+                <strong class="text-slate-900 dark:text-white font-display">Direct Local After-Sales Support:</strong>
+                <span class="text-slate-600 dark:text-slate-300"> You receive our direct technician mobile number if you upgrade your phone, switch NBN routers, or need guidance exporting police footage.</span>
+              </div>
             </div>
           </div>
 
-          <div class="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-4">
-            <a href="#quote" class="px-6 py-3 rounded-xl bg-gradient-to-r from-red-600 to-red-500 text-white font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all">
-              Speak with Richard
+          <!-- Action Buttons -->
+          <div class="pt-2 flex flex-wrap items-center gap-3">
+            <a href="#quote" class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-600 text-white font-black text-xs uppercase tracking-wider shadow-lg shadow-red-600/25 transition-all transform hover:-translate-y-0.5">
+              Book On-Site Assessment &rarr;
             </a>
-            <a href={phoneHref} class="px-5 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-white font-bold text-xs uppercase tracking-wider hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
-              Call {phone}
+            <a href={phoneHref} class="px-6 py-3.5 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-900 dark:text-white font-bold text-xs flex items-center gap-2 transition-all">
+              <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+              <span>Call {phone}</span>
             </a>
           </div>
 
         </div>
 
       </div>
-
     </div>
 
   </div>

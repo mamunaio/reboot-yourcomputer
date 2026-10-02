@@ -1,4 +1,5 @@
 ---
+// Component: MasterCablerSection.astro
 import { business } from '../config/business';
 import type { CablerSection, SiteSection } from '../lib/content-schema';
 import { BRISBANE_CCTV_FALLBACK } from '../data/cctv-brisbane-fallback';
@@ -15,15 +16,16 @@ const {
 
 const phone = site?.phone || business.phone;
 const phoneHref = site?.phoneHref || business.phoneHref;
-const badge = cabler?.badge || BRISBANE_CCTV_FALLBACK.cabler.badge;
-const heading = cabler?.heading || BRISBANE_CCTV_FALLBACK.cabler.heading;
-const description = cabler?.description || BRISBANE_CCTV_FALLBACK.cabler.description;
-const bullet1 = cabler?.bullet1 || BRISBANE_CCTV_FALLBACK.cabler.bullet1;
-const bullet2 = cabler?.bullet2 || BRISBANE_CCTV_FALLBACK.cabler.bullet2;
-const bullet3 = cabler?.bullet3 || BRISBANE_CCTV_FALLBACK.cabler.bullet3;
-const bullet4 = cabler?.bullet4 || BRISBANE_CCTV_FALLBACK.cabler.bullet4;
-const imageUrl = cabler?.imageUrl || BRISBANE_CCTV_FALLBACK.cabler.imageUrl;
-const ctaQuote = cabler?.ctaQuote || BRISBANE_CCTV_FALLBACK.cabler.ctaQuote;
+
+const badge = cabler?.badge || "ACMA CABLER • LICENSED QLD SECURITY • SAVE UP TO 50%";
+const heading = cabler?.heading || "You Don't Need an Electrician for IP Camera Systems.";
+const description = cabler?.description || "IP security cameras run on low-voltage 48V Power-over-Ethernet (PoE), not 240V mains power. As a licensed ACMA Master Cabler and computer technician, I handle the clean in-roof Cat6 cabling, firewall configuration, NVR recorder setup, and smartphone app setup – often at half the rate charged by general electricians.";
+const bullet1 = cabler?.bullet1 || "Licensed ACMA Open Master Cabler & QLD Security Provider";
+const bullet2 = cabler?.bullet2 || "Complete Network Router, Firewall & Multi-Device App Configuration";
+const bullet3 = cabler?.bullet3 || "100% Solid Copper Cat6 / Cat6A Low-Voltage PoE Cabling";
+const bullet4 = cabler?.bullet4 || "Flat $150/hr Transparent Rate • Zero Call-Out Fees Across Brisbane";
+const imageUrl = cabler?.imageUrl || "/cctv-slide2.jpg";
+const ctaQuote = cabler?.ctaQuote || "Request a Cabling Quote";
 const ctaCall = cabler?.ctaCall || `Call ${phone}`;
 ---
 
@@ -73,7 +75,13 @@ const ctaCall = cabler?.ctaCall || `Call ${phone}`;
         </div>
 
         <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1] font-display">
-          {heading}
+          {heading.includes('for IP Camera') ? (
+            <>
+              {heading.split('for IP Camera')[0]} <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-orange-600 to-red-600">for IP Camera{heading.split('for IP Camera')[1]}</span>
+            </>
+          ) : (
+            heading
+          )}
         </h2>
 
         <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">

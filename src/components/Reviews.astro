@@ -1,4 +1,5 @@
 ---
+// Component: Reviews.astro
 import { business } from '../config/business';
 import type { ReviewsSection } from '../lib/content-schema';
 import { BRISBANE_CCTV_FALLBACK } from '../data/cctv-brisbane-fallback';
@@ -8,86 +9,151 @@ interface Props {
 }
 
 const { reviews = BRISBANE_CCTV_FALLBACK.reviews } = Astro.props;
-const badge = reviews?.badge || BRISBANE_CCTV_FALLBACK.reviews.badge;
-const heading = reviews?.heading || BRISBANE_CCTV_FALLBACK.reviews.heading;
-const subheading = reviews?.subheading || BRISBANE_CCTV_FALLBACK.reviews.subheading;
-const rev1Author = reviews?.rev1Author || BRISBANE_CCTV_FALLBACK.reviews.rev1Author;
-const rev1Suburb = reviews?.rev1Suburb || BRISBANE_CCTV_FALLBACK.reviews.rev1Suburb;
-const rev1Text = reviews?.rev1Text || BRISBANE_CCTV_FALLBACK.reviews.rev1Text;
-const rev2Author = reviews?.rev2Author || BRISBANE_CCTV_FALLBACK.reviews.rev2Author;
-const rev2Suburb = reviews?.rev2Suburb || BRISBANE_CCTV_FALLBACK.reviews.rev2Suburb;
-const rev2Text = reviews?.rev2Text || BRISBANE_CCTV_FALLBACK.reviews.rev2Text;
-const rev3Author = reviews?.rev3Author || BRISBANE_CCTV_FALLBACK.reviews.rev3Author;
-const rev3Suburb = reviews?.rev3Suburb || BRISBANE_CCTV_FALLBACK.reviews.rev3Suburb;
-const rev3Text = reviews?.rev3Text || BRISBANE_CCTV_FALLBACK.reviews.rev3Text;
-const rev4Author = reviews?.rev4Author || BRISBANE_CCTV_FALLBACK.reviews.rev4Author;
-const rev4Suburb = reviews?.rev4Suburb || BRISBANE_CCTV_FALLBACK.reviews.rev4Suburb;
-const rev4Text = reviews?.rev4Text || BRISBANE_CCTV_FALLBACK.reviews.rev4Text;
+
+const heading = reviews?.heading || 'Why Choose Reboot Security?';
+const rev1Author = reviews?.rev1Author || 'David L.';
+const rev1Suburb = reviews?.rev1Suburb || 'Chermside • Home PoE System';
+const rev1Text = reviews?.rev1Text || 'Installed 4 cameras at our home. Super clean cabling through the roof cavity, not a single wire exposed on the exterior walls. The app works flawlessly on our phones.';
+
+const rev2Author = reviews?.rev2Author || 'Sarah & Kelvin M.';
+const rev2Suburb = reviews?.rev2Suburb || 'Carindale • 4K Deterrence';
+const rev2Text = reviews?.rev2Text || 'Replaced our old grainy cameras with 4K active deterrence cameras. The warning strobe turns on automatically whenever someone approaches our driveway. Incredible peace of mind.';
+
+const rev3Author = reviews?.rev3Author || 'Ken W.';
+const rev3Suburb = reviews?.rev3Suburb || 'Indooroopilly • Commercial Retail';
+const rev3Text = reviews?.rev3Text || 'Used them for our retail shop and storage room. Very knowledgeable on blind spots, network patching, and local QLD surveillance rules. Highly recommended for commercial jobs.';
+
+const rev4Author = reviews?.rev4Author || 'Angela T.';
+const rev4Suburb = reviews?.rev4Suburb || 'Sunnybank • Family Residence';
+const rev4Text = reviews?.rev4Text || 'Very polite, turned up on time, and spent 30 minutes teaching my elderly parents how to check the cameras on their iPad. Wonderful after-sales support.';
 ---
 
-<section class="py-16 lg:py-24 bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200/80 dark:border-white/10" id="reviews">
+
+<section class="py-20 bg-white dark:bg-slate-950 border-b border-slate-200/80 dark:border-white/10" id="reviews">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800/60 text-amber-800 dark:text-amber-300">
-        <span>⭐</span>
-        <span>{badge}</span>
+    <!-- Top Comparison Strip: Why Choose Us -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16 pb-12 border-b border-slate-200 dark:border-white/10">
+      <div class="lg:col-span-7 space-y-4">
+        <span class="text-xs font-black text-red-600 dark:text-red-400 uppercase tracking-widest px-3.5 py-1 rounded-full bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800/50 shadow-2xs">
+          Direct Accountability
+        </span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight font-display">
+          {heading}
+        </h2>
+        <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+          We are dedicated local computer technicians and licensed security installers based in Brisbane. We never subcontract your home or business job to untested gig-economy workers.
+        </p>
+        <div class="grid grid-cols-2 gap-4 pt-2 text-xs font-bold text-slate-700 dark:text-slate-300">
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-600 font-bold">✓</span>
+            <span>$0 Call-Out Fees Ever</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-600 font-bold">✓</span>
+            <span>7 AM – 10 PM 7 Days A Week</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-600 font-bold">✓</span>
+            <span>ACMA Open Registration</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-600 font-bold">✓</span>
+            <span>$20M Public Liability Cover</span>
+          </div>
+        </div>
       </div>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white font-display">
-        {heading}
-      </h2>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400">
-        {subheading}
-      </p>
+
+      <!-- Right Credential Card -->
+      <div class="lg:col-span-5 p-6 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10">
+          <span class="text-xs font-bold text-slate-500 uppercase">Licence Authority</span>
+          <span class="text-xs font-black text-slate-900 dark:text-white font-display">Queensland Police Service</span>
+        </div>
+        <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10">
+          <span class="text-xs font-bold text-slate-500 uppercase">Security Firm Licence</span>
+          <span class="px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800 text-xs font-bold">Class 1 &amp; 2 Approved</span>
+        </div>
+        <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10">
+          <span class="text-xs font-bold text-slate-500 uppercase">Data Cabling Certification</span>
+          <span class="px-2.5 py-0.5 rounded bg-blue-100 text-blue-800 text-xs font-bold">ACMA Master Cabler</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-slate-500 uppercase">Public Liability</span>
+          <span class="text-xs font-black text-slate-900 dark:text-white font-mono">$20,000,000 Insured</span>
+        </div>
+        <a href={business.phoneHref} class="block w-full py-3.5 rounded-xl bg-gradient-to-r from-red-600 to-red-500 text-white text-center font-bold text-xs uppercase tracking-wider shadow-md transition-all">
+          Speak With Technician: {business.phone}
+        </a>
+      </div>
     </div>
 
+    <!-- Verified Customer Reviews Header -->
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <span class="text-xs font-black text-amber-600 dark:text-amber-400 uppercase tracking-widest px-3.5 py-1 rounded-full bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800/50 shadow-2xs">
+        Verified Reviews
+      </span>
+      <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 dark:text-white mt-2 tracking-tight font-display">
+        What Local Property Owners Say
+      </h3>
+    </div>
+
+    <!-- 4 Review Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
       <!-- Review 1 -->
-      <div class="glass-box rounded-2xl p-6 space-y-4 flex flex-col justify-between">
-        <div class="space-y-3">
-          <div class="flex text-amber-400 text-sm">★★★★★</div>
-          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed italic">"{rev1Text}"</p>
+      <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 flex flex-col justify-between shadow-2xs">
+        <div>
+          <div class="flex text-amber-400 text-sm mb-3">★★★★★</div>
+          <p class="text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed italic mb-4">
+            "{rev1Text}"
+          </p>
         </div>
         <div class="pt-3 border-t border-slate-200 dark:border-white/10">
-          <div class="font-bold text-sm text-slate-900 dark:text-white font-display">{rev1Author}</div>
-          <div class="text-[11px] text-slate-500 dark:text-slate-400">{rev1Suburb}</div>
+          <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm font-display">{rev1Author}</div>
+          <div class="text-[11px] text-slate-500">{rev1Suburb}</div>
         </div>
       </div>
 
       <!-- Review 2 -->
-      <div class="glass-box rounded-2xl p-6 space-y-4 flex flex-col justify-between">
-        <div class="space-y-3">
-          <div class="flex text-amber-400 text-sm">★★★★★</div>
-          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed italic">"{rev2Text}"</p>
+      <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 flex flex-col justify-between shadow-2xs">
+        <div>
+          <div class="flex text-amber-400 text-sm mb-3">★★★★★</div>
+          <p class="text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed italic mb-4">
+            "{rev2Text}"
+          </p>
         </div>
         <div class="pt-3 border-t border-slate-200 dark:border-white/10">
-          <div class="font-bold text-sm text-slate-900 dark:text-white font-display">{rev2Author}</div>
-          <div class="text-[11px] text-slate-500 dark:text-slate-400">{rev2Suburb}</div>
+          <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm font-display">{rev2Author}</div>
+          <div class="text-[11px] text-slate-500">{rev2Suburb}</div>
         </div>
       </div>
 
       <!-- Review 3 -->
-      <div class="glass-box rounded-2xl p-6 space-y-4 flex flex-col justify-between">
-        <div class="space-y-3">
-          <div class="flex text-amber-400 text-sm">★★★★★</div>
-          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed italic">"{rev3Text}"</p>
+      <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 flex flex-col justify-between shadow-2xs">
+        <div>
+          <div class="flex text-amber-400 text-sm mb-3">★★★★★</div>
+          <p class="text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed italic mb-4">
+            "{rev3Text}"
+          </p>
         </div>
         <div class="pt-3 border-t border-slate-200 dark:border-white/10">
-          <div class="font-bold text-sm text-slate-900 dark:text-white font-display">{rev3Author}</div>
-          <div class="text-[11px] text-slate-500 dark:text-slate-400">{rev3Suburb}</div>
+          <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm font-display">{rev3Author}</div>
+          <div class="text-[11px] text-slate-500">{rev3Suburb}</div>
         </div>
       </div>
 
       <!-- Review 4 -->
-      <div class="glass-box rounded-2xl p-6 space-y-4 flex flex-col justify-between">
-        <div class="space-y-3">
-          <div class="flex text-amber-400 text-sm">★★★★★</div>
-          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed italic">"{rev4Text}"</p>
+      <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 flex flex-col justify-between shadow-2xs">
+        <div>
+          <div class="flex text-amber-400 text-sm mb-3">★★★★★</div>
+          <p class="text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed italic mb-4">
+            "{rev4Text}"
+          </p>
         </div>
         <div class="pt-3 border-t border-slate-200 dark:border-white/10">
-          <div class="font-bold text-sm text-slate-900 dark:text-white font-display">{rev4Author}</div>
-          <div class="text-[11px] text-slate-500 dark:text-slate-400">{rev4Suburb}</div>
+          <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm font-display">{rev4Author}</div>
+          <div class="text-[11px] text-slate-500">{rev4Suburb}</div>
         </div>
       </div>
 

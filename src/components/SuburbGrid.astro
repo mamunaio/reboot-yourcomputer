@@ -1,4 +1,5 @@
 ---
+// Component: SuburbGrid.astro
 import type { SuburbsSection, SiteSection } from '../lib/content-schema';
 import { BRISBANE_CCTV_FALLBACK } from '../data/cctv-brisbane-fallback';
 
@@ -12,121 +13,220 @@ const {
   site = BRISBANE_CCTV_FALLBACK.site,
 } = Astro.props;
 
-const badge = suburbs?.badge || BRISBANE_CCTV_FALLBACK.suburbs.badge;
-const heading = suburbs?.heading || BRISBANE_CCTV_FALLBACK.suburbs.heading;
-const intro = suburbs?.intro || BRISBANE_CCTV_FALLBACK.suburbs.intro;
-function normalizeSuburbList(value: unknown): string[] {
-  if (Array.isArray(value)) {
-    return value.map((s) => String(s).trim()).filter(Boolean);
+const badge = suburbs?.badge || 'Greater Brisbane Coverage';
+const heading = suburbs?.heading || 'Security & CCTV Installation Across Brisbane';
+const intro = suburbs?.intro || 'We provide $0 call-out fee CCTV installations, network cabling, and on-site security assessments across all Brisbane metropolitan suburbs, Ipswich, Logan, Moreton Bay, and Redlands.';
+
+function normalizeArray(input: string[] | string | undefined, fallback: string[]): string[] {
+  if (Array.isArray(input)) return input;
+  if (typeof input === 'string') {
+    return input.split(',').map((s) => s.trim()).filter(Boolean);
   }
-  if (typeof value === 'string' && value.trim()) {
-    return value
-      .split(',')
-      .map((s) => s.trim())
-      .filter(Boolean);
-  }
-  return [];
+  return fallback;
 }
 
-const innerBrisbane = normalizeSuburbList(suburbs?.innerBrisbane ?? BRISBANE_CCTV_FALLBACK.suburbs.innerBrisbane);
-const southBrisbane = normalizeSuburbList(suburbs?.southBrisbane ?? BRISBANE_CCTV_FALLBACK.suburbs.southBrisbane);
-const northBrisbane = normalizeSuburbList(suburbs?.northBrisbane ?? BRISBANE_CCTV_FALLBACK.suburbs.northBrisbane);
-const eastBrisbane = normalizeSuburbList(suburbs?.eastBrisbane ?? BRISBANE_CCTV_FALLBACK.suburbs.eastBrisbane);
-const westBrisbane = normalizeSuburbList(suburbs?.westBrisbane ?? BRISBANE_CCTV_FALLBACK.suburbs.westBrisbane);
-const loganSurrounds = normalizeSuburbList(suburbs?.loganSurrounds ?? BRISBANE_CCTV_FALLBACK.suburbs.loganSurrounds);
+const innerBrisbane = normalizeArray(suburbs?.innerBrisbane, BRISBANE_CCTV_FALLBACK.suburbs.innerBrisbane || []);
+const southBrisbane = normalizeArray(suburbs?.southBrisbane, BRISBANE_CCTV_FALLBACK.suburbs.southBrisbane || []);
+const northBrisbane = normalizeArray(suburbs?.northBrisbane, BRISBANE_CCTV_FALLBACK.suburbs.northBrisbane || []);
+const eastBrisbane = normalizeArray(suburbs?.eastBrisbane, BRISBANE_CCTV_FALLBACK.suburbs.eastBrisbane || []);
+const westBrisbane = normalizeArray(suburbs?.westBrisbane, BRISBANE_CCTV_FALLBACK.suburbs.westBrisbane || []);
+const loganSurrounds = normalizeArray(suburbs?.loganSurrounds, BRISBANE_CCTV_FALLBACK.suburbs.loganSurrounds || []);
+
+// Combine all distinct suburbs for search and display
+const allSuburbs = Array.from(new Set([
+  ...innerBrisbane,
+  ...southBrisbane,
+  ...northBrisbane,
+  ...eastBrisbane,
+  ...westBrisbane,
+  ...loganSurrounds,
+]));
 ---
 
-<section class="py-16 lg:py-24 bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-white/10" id="suburbs">
+<!-- LOCAL SERVICE COVERAGE (GROUPED SUBURBS) -->
+<section class="py-20 bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200/80 dark:border-white/10" id="service-areas">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/60 text-red-700 dark:text-red-300">
-        <span>🗺️</span>
-        <span>{badge}</span>
-      </div>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white font-display">
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <span class="text-xs font-black text-red-600 dark:text-red-400 uppercase tracking-widest px-3.5 py-1 rounded-full bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800/50 shadow-2xs">
+        Local Coverage Grid
+      </span>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white mt-3 tracking-tight font-display">
         {heading}
       </h2>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400">
-        {intro}
+      <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-2">
+        Prompt mobile dispatch with zero travel fees. Click any suburb below to auto-fill your quote request.
       </p>
+
+      <!-- Search Input -->
+      <div class="mt-6 max-w-md mx-auto">
+        <input
+          type="text"
+          id="suburb-filter-input"
+          oninput="filterSuburbs(this.value)"
+          placeholder="Type your suburb (e.g. Chermside, Carindale, North Lakes, Ipswich)..."
+          class="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-red-500 shadow-sm"
+        />
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Suburb Pills Container -->
+    <div id="suburbs-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 text-center">
 
-      <!-- Inner -->
-      <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-white/5 space-y-3">
-        <h3 class="text-base font-bold text-red-600 dark:text-red-400">Brisbane Inner &amp; CBD</h3>
-        <div class="flex flex-wrap gap-1.5">
-          {innerBrisbane.map((suburb) => (
-            <button type="button" onclick={`selectSuburbForQuote('${suburb}')`} class="px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs text-slate-700 dark:text-slate-300 hover:border-red-500 cursor-pointer transition-colors">
-              {suburb}
-            </button>
-          ))}
-        </div>
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Brisbane CBD (4000)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Brisbane CBD</div>
+        <div class="text-[11px] text-red-600 font-bold">4000 • Primary</div>
       </div>
 
-      <!-- South -->
-      <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-white/5 space-y-3">
-        <h3 class="text-base font-bold text-red-600 dark:text-red-400">Brisbane South</h3>
-        <div class="flex flex-wrap gap-1.5">
-          {southBrisbane.map((suburb) => (
-            <button type="button" onclick={`selectSuburbForQuote('${suburb}')`} class="px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs text-slate-700 dark:text-slate-300 hover:border-red-500 cursor-pointer transition-colors">
-              {suburb}
-            </button>
-          ))}
-        </div>
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Chermside (4032)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Chermside</div>
+        <div class="text-[11px] text-slate-500">4032 • Covered</div>
       </div>
 
-      <!-- North -->
-      <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-white/5 space-y-3">
-        <h3 class="text-base font-bold text-red-600 dark:text-red-400">Brisbane North</h3>
-        <div class="flex flex-wrap gap-1.5">
-          {northBrisbane.map((suburb) => (
-            <button type="button" onclick={`selectSuburbForQuote('${suburb}')`} class="px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs text-slate-700 dark:text-slate-300 hover:border-red-500 cursor-pointer transition-colors">
-              {suburb}
-            </button>
-          ))}
-        </div>
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Carindale (4152)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Carindale</div>
+        <div class="text-[11px] text-slate-500">4152 • Covered</div>
       </div>
 
-      <!-- East -->
-      <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-white/5 space-y-3">
-        <h3 class="text-base font-bold text-red-600 dark:text-red-400">Brisbane East &amp; Bayside</h3>
-        <div class="flex flex-wrap gap-1.5">
-          {eastBrisbane.map((suburb) => (
-            <button type="button" onclick={`selectSuburbForQuote('${suburb}')`} class="px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs text-slate-700 dark:text-slate-300 hover:border-red-500 cursor-pointer transition-colors">
-              {suburb}
-            </button>
-          ))}
-        </div>
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Indooroopilly (4068)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Indooroopilly</div>
+        <div class="text-[11px] text-slate-500">4068 • Covered</div>
       </div>
 
-      <!-- West -->
-      <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-white/5 space-y-3">
-        <h3 class="text-base font-bold text-red-600 dark:text-red-400">Western Suburbs</h3>
-        <div class="flex flex-wrap gap-1.5">
-          {westBrisbane.map((suburb) => (
-            <button type="button" onclick={`selectSuburbForQuote('${suburb}')`} class="px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs text-slate-700 dark:text-slate-300 hover:border-red-500 cursor-pointer transition-colors">
-              {suburb}
-            </button>
-          ))}
-        </div>
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Sunnybank (4109)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Sunnybank</div>
+        <div class="text-[11px] text-slate-500">4109 • Covered</div>
       </div>
 
-      <!-- Logan -->
-      <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-white/5 space-y-3">
-        <h3 class="text-base font-bold text-red-600 dark:text-red-400">Logan &amp; Surrounds</h3>
-        <div class="flex flex-wrap gap-1.5">
-          {loganSurrounds.map((suburb) => (
-            <button type="button" onclick={`selectSuburbForQuote('${suburb}')`} class="px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs text-slate-700 dark:text-slate-300 hover:border-red-500 cursor-pointer transition-colors">
-              {suburb}
-            </button>
-          ))}
-        </div>
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Mount Gravatt (4122)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Mt Gravatt</div>
+        <div class="text-[11px] text-slate-500">4122 • Covered</div>
+      </div>
+
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Aspley (4034)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Aspley</div>
+        <div class="text-[11px] text-slate-500">4034 • Covered</div>
+      </div>
+
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('North Lakes (4509)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">North Lakes</div>
+        <div class="text-[11px] text-slate-500">4509 • Covered</div>
+      </div>
+
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Strathpine (4500)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Strathpine</div>
+        <div class="text-[11px] text-slate-500">4500 • Covered</div>
+      </div>
+
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Caboolture (4510)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Caboolture</div>
+        <div class="text-[11px] text-slate-500">4510 • Covered</div>
+      </div>
+
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Redcliffe (4020)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Redcliffe</div>
+        <div class="text-[11px] text-slate-500">4020 • Covered</div>
+      </div>
+
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Logan Central (4114)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Logan Central</div>
+        <div class="text-[11px] text-slate-500">4114 • Covered</div>
+      </div>
+
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Springwood (4127)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Springwood</div>
+        <div class="text-[11px] text-slate-500">4127 • Covered</div>
+      </div>
+
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Browns Plains (4118)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Browns Plains</div>
+        <div class="text-[11px] text-slate-500">4118 • Covered</div>
+      </div>
+
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Underwood (4119)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Underwood</div>
+        <div class="text-[11px] text-slate-500">4119 • Covered</div>
+      </div>
+
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Ipswich CBD (4305)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Ipswich CBD</div>
+        <div class="text-[11px] text-slate-500">4305 • Covered</div>
+      </div>
+
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Springfield (4300)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Springfield</div>
+        <div class="text-[11px] text-slate-500">4300 • Covered</div>
+      </div>
+
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Capalaba (4157)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Capalaba</div>
+        <div class="text-[11px] text-slate-500">4157 • Covered</div>
+      </div>
+
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Cleveland (4163)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Cleveland</div>
+        <div class="text-[11px] text-slate-500">4163 • Covered</div>
+      </div>
+
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Victoria Point (4165)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Victoria Point</div>
+        <div class="text-[11px] text-slate-500">4165 • Covered</div>
+      </div>
+
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Toowong (4066)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Toowong</div>
+        <div class="text-[11px] text-slate-500">4066 • Covered</div>
+      </div>
+
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('New Farm (4005)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">New Farm</div>
+        <div class="text-[11px] text-slate-500">4005 • Covered</div>
+      </div>
+
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Paddington (4064)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Paddington</div>
+        <div class="text-[11px] text-slate-500">4064 • Covered</div>
+      </div>
+
+      <div class="suburb-pill p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500 hover:bg-red-50/50 transition-all shadow-2xs" onclick="selectSuburbForQuote('Greater Brisbane (All Areas)')">
+        <div class="font-bold text-sm text-slate-900 dark:text-white font-display">Greater Brisbane</div>
+        <div class="text-[11px] text-red-600 font-bold">All Areas • $0 Call-out</div>
       </div>
 
     </div>
 
   </div>
 </section>
+
+
+<script is:inline>
+  function filterSuburbs(query) {
+    const q = query.toLowerCase().trim();
+    const pills = document.querySelectorAll('.suburb-pill');
+    pills.forEach((pill) => {
+      const text = pill.textContent.toLowerCase();
+      if (!q || text.includes(q)) {
+        pill.style.display = '';
+      } else {
+        pill.style.display = 'none';
+      }
+    });
+  }
+
+  function selectSuburbForQuote(suburb) {
+    const quoteSection = document.getElementById('quote');
+    if (quoteSection) {
+      quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    const notesInput = document.getElementById('form-notes');
+    if (notesInput) {
+      notesInput.value = 'Suburb / Location: ' + suburb;
+    }
+    setTimeout(() => {
+      const nameInput = document.getElementById('form-name');
+      if (nameInput) {
+        nameInput.focus();
+      }
+    }, 450);
+  }
+</script>
